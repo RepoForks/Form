@@ -38,11 +38,11 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
   "options": [
     {
       "id": "Q4N",
-      "title": "No"
+      "text": "No"
     },
     {
     "id": "Q4Y",
-    "title": "Yes"
+    "text": "Yes"
     }
   ]
 }
@@ -57,15 +57,15 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
   "options": [
     {
       "id": "PERSONA",
-      "title": "Person A"
+      "text": "Person A"
     },
     {
       "id": "PERSONB",
-      "title": "Person B"
+      "text": "Person B"
     },
     {
       "id": "PERSONC",
-      "title": "Person C"
+      "text": "Person C"
     }
   ]
 }
@@ -82,15 +82,15 @@ Fields can rely on a parent or the answers within a field can specify the parent
 {
   "id": "Q4",
   "title": "Did you use public transport today?",
-  "type": "TOGGLE_BUTTON",
+  "type": "YES_NO",
   "options": [
     {
       "id": "PTRANSNO",
-      "title": "No"
+      "text": "No"
     },
     {
     "id": "PTRANSYES",
-    "title": "Yes"
+    "text": "Yes"
     }
   ],
   "subfields": [
@@ -103,27 +103,27 @@ Fields can rely on a parent or the answers within a field can specify the parent
         {
           "id": "PRIVTRANSA",
           "parent": "PTRANSNO",
-          "title": "Walking"
+          "text": "Walking"
         },
         {
           "id": "PRIVTRANSB",
           "parent": "PTRANSNO",
-          "title": "Cycling"
+          "text": "Cycling"
         },
         {
           "id": "PRIVTRANSC",
           "parent": "PTRANSNO",
-          "title": "Car"
+          "text": "Car"
         },
         {
           "id": "POBTRANSA",
           "parent": "PTRANSYES",
-          "title": "Bus"
+          "text": "Bus"
         },
         {
           "id": "POBTRANSB",
           "parent": "PTRANSYES",
-          "title": "Train"
+          "text": "Train"
         },
       ]
     }
@@ -141,11 +141,11 @@ Fields can rely on a parent or the answers within a field can specify the parent
   "options": [
     {
       "id": "PTRANSNO",
-      "title": "No"
+      "text": "No"
     },
     {
     "id": "PTRANSYES",
-    "title": "Yes"
+    "text": "Yes"
     }
   ],
   "subfields": [
