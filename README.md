@@ -94,7 +94,7 @@ Fields can rely on a parent or the answers within a field can specify the parent
     "title": "Yes"
     }
   ],
-  subfields: [
+  "subfields": [
     {
       "id": "Q3",
       "title": "Transport Method",
@@ -103,27 +103,27 @@ Fields can rely on a parent or the answers within a field can specify the parent
       "options": [
         {
           "id": "PRIVTRANSA",
-          parent: "PTRANSNO",
+          "parent": "PTRANSNO",
           "title": "Walking"
         },
         {
           "id": "PRIVTRANSB",
-          parent: "PTRANSNO",
+          "parent": "PTRANSNO",
           "title": "Cycling"
         },
         {
           "id": "PRIVTRANSC",
-          parent: "PTRANSNO",
+          "parent": "PTRANSNO",
           "title": "Car"
         },
         {
           "id": "POBTRANSA",
-          parent: "PTRANSYES",
+          "parent": "PTRANSYES",
           "title": "Bus"
         },
         {
           "id": "POBTRANSB",
-          parent: "PTRANSYES",
+          "parent": "PTRANSYES",
           "title": "Train"
         },
       ]
@@ -149,7 +149,7 @@ Fields can rely on a parent or the answers within a field can specify the parent
     "title": "Yes"
     }
   ],
-  subfields: [
+  "subfields": [
     {
       "id": "Q3",
       "title": "Describe the public transport you used",
