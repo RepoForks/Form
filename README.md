@@ -26,7 +26,6 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
 {
   "id": "Q1",
   "title": "Todays Date",
-  "interactive": false,
   "type": "CURRENT_DATE"
 }
 ```
@@ -35,7 +34,7 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
 {
   "id": "Q4",
   "title": "Did anyone go fishing for octopus today?",
-  "type": "TOGGLE_BUTTON",
+  "type": "YES_NO",
   "options": [
     {
       "id": "Q4N",
