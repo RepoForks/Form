@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="field_padding">8dp</dimen>
+
+    <dimen name="field_font_title_size">22sp</dimen>
+    <dimen name="field_font_subtitle_size">18sp</dimen>
+    <dimen name="field_font_body_size">16sp</dimen>
+</resources>
