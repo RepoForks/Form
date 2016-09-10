@@ -321,34 +321,36 @@ An implementation of this library has a requirement for relatively obscure local
 Example dictionary:
 
 ```json
-[
-  {
-    "languageId": "english",
-    "dictionary": [
-      {
-        key: "{DOB}",
-        text: "Date of Birth"
-      },
-      {
-        key: "{FORENAME_QUESTION}",
-        text: "What is your first name?"
-      }
-    ]
-  },
+"dictionary": {
+  [
     {
-    "languageId": "spanish",
-    "dictionary": [
+      "languageId": "english",
+      "dictionary": [
+        {
+          key: "{DOB}",
+          text: "Date of Birth"
+        },
+        {
+          key: "{FORENAME_QUESTION}",
+          text: "What is your first name?"
+        }
+      ]
+    },
       {
-        key: "{DOB}",
-        text: "Fecha de nacimiento"
-      },
-      {
-        key: "{FORENAME_QUESTION}",
-        text: "¿cuál es tu primer nombre?"
-      }
-    ]
-  }
-]
+      "languageId": "spanish",
+      "dictionary": [
+        {
+          key: "{DOB}",
+          text: "Fecha de nacimiento"
+        },
+        {
+          key: "{FORENAME_QUESTION}",
+          text: "¿cuál es tu primer nombre?"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 
