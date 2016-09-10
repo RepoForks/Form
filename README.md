@@ -1,12 +1,28 @@
 # Form
-Modern replacement for ODK Collect forms on Android.
+Modern replacement for [ODK Collect](https://opendatakit.org/use/collect/) forms on Android.
 
-# Format
+## Android Usage
+
+Create a Form object from a String of json in the [format detailed below](https://github.com/fiskurgit/Form#format):
+
+```java
+Form form = FormApi.getInstance().createForm(JSON_STRING);
+```
+
+Once you have a Form object you can create the user interface by passing a ```LinearLayout```, your implementation should wrap this layout in a ```ScrollView```:
+
+```java
+LinearLayout formHolder = (LinearLayout) findViewById(R.id.form_holder);
+FormApi.getInstance().buildViews(context, form, formHolder);
+```
+
+## Format
 
 Simple Form object containing an array of fields:
 
 ```json
 {
+  "id": "QWERT098765",
   "title": "Octopus Monitoring",
   "date": "05092016",
   "time": "10:49",
@@ -160,6 +176,131 @@ Fields can rely on a parent or the answers within a field can specify the parent
       "title": "Why didn't you use public transport?",
       "parent": "PTRANSNO",
       "type": "FREE_TEXT"
+    }
+  ]
+}
+```
+
+## Available Fields
+
+### Divider
+
+A simple non-interactive horizontal divider to seperate two other fields.
+
+```json
+{
+  "id": "D1",
+  "type": "DIVIDER"
+}
+```
+
+### Current Date
+
+A non-interactive field that displays, and returns, the current date.
+
+```json
+{
+  "id": "D1",
+  "type": "CURRENT_DATE",
+  "text": "Today's Date"
+}
+```
+
+### Date Picker
+
+```json
+{
+  "id": "DOB1",
+  "type": "DATE",
+  "text": "Date of Birth"
+}
+```
+
+### Time Picker
+
+```json
+{
+  "id": "WAKE1",
+  "type": "TIME",
+  "text": "What time did you wake up?"
+}
+```
+
+### Single Choice (Radio Group)
+
+```
+{
+  "id": "GENDER1",
+  "type": "SINGLE_CHOICE",
+  "text": "What gender do you identify with?",
+  "choices": [
+    {
+      "id": "GENA",
+      "text": "female"
+    },
+    {
+      "id": "GENB",
+      "text": "male"
+    },
+    {
+      "id": "GENC",
+      "text": "unspecified"
+    },
+    {
+      "id": "GEND",
+      "text": "intersex"
+    },
+    {
+      "id": "GENE",
+      "text": "prefer not to say"
+    }
+  ]
+}
+```
+
+### Multiple Choice (Checkboxes)
+
+```json
+{
+  "id": "MUSIC1",
+  "type": "MULTI_CHOICE",
+  "text": "Which music genres do you enjoy?",
+  "choices": [
+    {
+      "id": "GENA",
+      "text": "Avant-Garde"
+    },
+    {
+      "id": "GENB",
+      "text": "Baroque"
+    },
+    {
+      "id": "GENC",
+      "text": "Chamber Music"
+    },
+    {
+      "id": "GEND",
+      "text": "Choral"
+    },
+    {
+      "id": "GENE",
+      "text": "Classical Crossover"
+    },
+    {
+      "id": "GENF",
+      "text": "Minimalism"
+    },
+    {
+      "id": "GENG",
+      "text": "Modern Composition"
+    },
+    {
+      "id": "GENH",
+      "text": "Opera"
+    },
+    {
+      "id": "GENI",
+      "text": "Romantic"
     }
   ]
 }
