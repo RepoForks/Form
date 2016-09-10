@@ -327,12 +327,12 @@ Example dictionary:
       "languageId": "english",
       "dictionary": [
         {
-          key: "{DOB}",
-          text: "Date of Birth"
+          "key": "{DOB}",
+          "text": "Date of Birth"
         },
         {
-          key: "{FORENAME_QUESTION}",
-          text: "What is your first name?"
+          "key": "{FORENAME_QUESTION}",
+          "text": "What is your first name?"
         }
       ]
     },
@@ -340,12 +340,12 @@ Example dictionary:
       "languageId": "spanish",
       "dictionary": [
         {
-          key: "{DOB}",
-          text: "Fecha de nacimiento"
+          "key": "{DOB}",
+          "text": "Fecha de nacimiento"
         },
         {
-          key: "{FORENAME_QUESTION}",
-          text: "¿cuál es tu primer nombre?"
+          "key": "{FORENAME_QUESTION}",
+          "text": "¿cuál es tu primer nombre?"
         }
       ]
     }
