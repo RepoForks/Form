@@ -306,6 +306,55 @@ A non-interactive field that displays, and returns, the current date.
 }
 ```
 
+## Localisation
+
+An implementation of this library has a requirement for relatively obscure local/regional dialects, Android's i18n isn't sufficient so a simple dictionary api is used, if the key isn't found in the dictionary the text is displayed as-is:
+
+```json
+{
+  "id": "DOB1",
+  "type": "DATE",
+  "text": "{DOB}"
+}
+```
+
+Example dictionary:
+
+```json
+[
+  {
+    "languageId": "english",
+    "dictionary": [
+      {
+        key: "{DOB}",
+        text: "Date of Birth"
+      },
+      {
+        key: "{FORENAME_QUESTION}",
+        text: "What is your first name?"
+      }
+    ]
+  },
+    {
+    "languageId": "spanish",
+    "dictionary": [
+      {
+        key: "{DOB}",
+        text: "Fecha de nacimiento"
+      },
+      {
+        key: "{FORENAME_QUESTION}",
+        text: "¿cuál es tu primer nombre?"
+      }
+    ]
+  }
+]
+```
+
+
+
+
+
 
 
 
