@@ -234,6 +234,54 @@ Allow the user to select a date
 }
 ```
 
+### Multiple Choice (Checkboxes)
+
+```json
+{
+  "id": "MUSIC1",
+  "type": "MULTI_CHOICE",
+  "text": "Which music genres do you enjoy?",
+  "choices": [
+    {
+      "id": "GENA",
+      "text": "Avant-Garde"
+    },
+    {
+      "id": "GENB",
+      "text": "Baroque"
+    },
+    {
+      "id": "GENC",
+      "text": "Chamber Music"
+    },
+    {
+      "id": "GEND",
+      "text": "Choral"
+    },
+    {
+      "id": "GENE",
+      "text": "Classical Crossover"
+    },
+    {
+      "id": "GENF",
+      "text": "Minimalism"
+    },
+    {
+      "id": "GENG",
+      "text": "Modern Composition"
+    },
+    {
+      "id": "GENH",
+      "text": "Opera"
+    },
+    {
+      "id": "GENI",
+      "text": "Romantic"
+    }
+  ]
+}
+```
+
 
 
 
