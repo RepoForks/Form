@@ -202,6 +202,38 @@ Allow the user to select a date
 }
 ```
 
+### Single Choice (Radio Group)
+
+```
+{
+  "id": "GENDER1",
+  "type": "SINGLE_CHOICE",
+  "text": "What gender do you identify with?",
+  "choices": [
+    {
+      "id": "GENA",
+      "text": "female"
+    },
+    {
+      "id": "GENB",
+      "text": "male"
+    },
+    {
+      "id": "GENC",
+      "text": "unspecified"
+    },
+    {
+      "id": "GEND",
+      "text": "intersex"
+    },
+    {
+      "id": "GENE",
+      "text": "prefer not to say"
+    }
+  ]
+}
+```
+
 
 
 
