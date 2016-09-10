@@ -165,6 +165,19 @@ Fields can rely on a parent or the answers within a field can specify the parent
 }
 ```
 
+## Available Fields
+
+### Divider
+
+A simple non-interactive horizontal divider to seperate two other fields.
+
+```json
+{
+  "id": "D1",
+  "type": "DIVIDER"
+}
+```
+
 
 
 
