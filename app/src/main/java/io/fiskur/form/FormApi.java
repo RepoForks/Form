@@ -7,6 +7,13 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import io.fiskur.form.views.FieldCurrentDate;
 import io.fiskur.form.views.FieldFreeText;
 import io.fiskur.form.views.FieldStaticText;
