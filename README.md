@@ -1,7 +1,22 @@
 # Form
 Modern replacement for ODK Collect forms on Android.
 
-# Format
+## Android Usage
+
+Create a Form object from a String of json in the [format detailed below](https://github.com/fiskurgit/Form#format):
+
+```java
+Form form = FormApi.getInstance().createForm(JSON_STRING);
+```
+
+Once you have a Form object you can create the user interface by passing a ```LinearLayout```, your implementation should wrap this layout in a ```ScrollView```:
+
+```java
+LinearLayout formHolder = (LinearLayout) findViewById(R.id.form_holder);
+FormApi.getInstance().buildViews(context, form, formHolder);
+```
+
+## Format
 
 Simple Form object containing an array of fields:
 
