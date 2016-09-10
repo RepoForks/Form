@@ -178,6 +178,30 @@ A simple non-interactive horizontal divider to seperate two other fields.
 }
 ```
 
+### Current Date
+
+A non-interactive field that displays, and returns, the current date.
+
+```json
+{
+  "id": "D1",
+  "type": "CURRENT_DATE",
+  "text": "Today's Date"
+}
+```
+
+### Date Picker
+
+Allow the user to select a date
+
+```json
+{
+  "id": "DOB1",
+  "type": "DATE",
+  "text": "Date of Birth"
+}
+```
+
 
 
 
