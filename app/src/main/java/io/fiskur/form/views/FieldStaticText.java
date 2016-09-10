@@ -37,28 +37,24 @@ public class FieldStaticText extends LinearLayout {
     staticTextBody = (TextView) findViewById(R.id.static_body);
   }
 
-  public void setTitle(String text){
-    staticTextTitle.setVisibility(View.VISIBLE);
-    staticTextTitle.setText(text);
-  }
-
-  public void setSubtitle(String text){
-    staticTextSubtitle.setVisibility(View.VISIBLE);
-    staticTextSubtitle.setText(text);
-  }
-
   public void setField(Field field){
     if(field.title != null && !field.title.isEmpty()){
       staticTextTitle.setVisibility(View.VISIBLE);
       staticTextTitle.setText(field.title);
+    }else{
+      removeView(staticTextTitle);
     }
     if(field.subtitle != null && !field.subtitle.isEmpty()){
       staticTextSubtitle.setVisibility(View.VISIBLE);
       staticTextSubtitle.setText(field.subtitle);
+    }else{
+      removeView(staticTextSubtitle);
     }
     if(field.body != null && !field.body.isEmpty()){
       staticTextBody.setVisibility(View.VISIBLE);
       staticTextBody.setText(field.body);
+    }else{
+      removeView(staticTextBody);
     }
   }
 }

@@ -40,7 +40,8 @@ public class FieldFreeText extends LinearLayout {
     if(field.title != null && !field.title.isEmpty()){
       freeTextTitle.setText(field.title);
       freeTextTitle.setVisibility(View.VISIBLE);
+    }else{
+      removeView(freeTextTitle);
     }
-
   }
 }

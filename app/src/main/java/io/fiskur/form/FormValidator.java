@@ -66,6 +66,4 @@ public class FormValidator {
 
     return duplicates;
   }
-
-
 }
