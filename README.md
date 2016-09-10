@@ -207,13 +207,21 @@ A non-interactive field that displays, and returns, the current date.
 
 ### Date Picker
 
-Allow the user to select a date
-
 ```json
 {
   "id": "DOB1",
   "type": "DATE",
   "text": "Date of Birth"
+}
+```
+
+### Time Picker
+
+```json
+{
+  "id": "WAKE1",
+  "type": "TIME",
+  "text": "What time did you wake up?"
 }
 ```
 
