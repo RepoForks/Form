@@ -321,8 +321,7 @@ An implementation of this library has a requirement for relatively obscure local
 Example dictionary:
 
 ```json
-"dictionary": {
-  [
+"dictionary": [
     {
       "languageId": "english",
       "dictionary": [
