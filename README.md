@@ -1,5 +1,5 @@
 # Form
-Modern replacement for ODK Collect forms on Android.
+Modern replacement for [ODK Collect](https://opendatakit.org/use/collect/) forms on Android.
 
 ## Android Usage
 
