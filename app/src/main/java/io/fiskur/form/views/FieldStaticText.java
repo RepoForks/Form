@@ -32,9 +32,9 @@ public class FieldStaticText extends LinearLayout {
 
   private void init(){
     inflate(getContext(), R.layout.field_static_text, this);
-    staticTextTitle = (TextView) this.findViewById(R.id.static_title);
-    staticTextSubtitle = (TextView) this.findViewById(R.id.static_subtitle);
-    staticTextBody = (TextView) this.findViewById(R.id.static_body);
+    staticTextTitle = (TextView) findViewById(R.id.static_title);
+    staticTextSubtitle = (TextView) findViewById(R.id.static_subtitle);
+    staticTextBody = (TextView) findViewById(R.id.static_body);
   }
 
   public void setTitle(String text){

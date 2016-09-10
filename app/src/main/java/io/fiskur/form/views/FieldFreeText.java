@@ -32,8 +32,8 @@ public class FieldFreeText extends LinearLayout {
 
   private void init(){
     inflate(getContext(), R.layout.field_free_text, this);
-    freeTextTitle = (TextView) this.findViewById(R.id.free_text_title);
-    freeTextEdit = (EditText) this.findViewById(R.id.free_text_edit);
+    freeTextTitle = (TextView) findViewById(R.id.free_text_title);
+    freeTextEdit = (EditText) findViewById(R.id.free_text_edit);
   }
 
   public void setField(Field field){

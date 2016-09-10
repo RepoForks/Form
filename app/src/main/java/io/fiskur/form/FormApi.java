@@ -1,11 +1,13 @@
 package io.fiskur.form;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.fiskur.form.views.FieldCurrentDate;
 import io.fiskur.form.views.FieldFreeText;
 import io.fiskur.form.views.FieldStaticText;
 
@@ -49,6 +51,12 @@ public class FormApi {
         freeText.setField(field);
         root.addView(freeText);
         break;
+      case Field.TYPE_CURRENT_DATE:
+        FieldCurrentDate currentDate = new FieldCurrentDate(context);
+        currentDate.setTag(field.id);
+        currentDate.setField(field);
+        root.addView(currentDate);
+        break;
     }
     //recursively add subfields
     //todo - create mechanism to toggle subfield visibility based on responses
@@ -56,6 +64,23 @@ public class FormApi {
       for(Field subfield : field.subfields){
         addField(context, field, root);
       }
+    }
+  }
+
+  public void getResponses(Context context, Form form, LinearLayout root){
+    final int childcount = root.getChildCount();
+    for (int i = 0; i < childcount; i++) {
+      View view = root.getChildAt(i);
+      if(view instanceof FieldStaticText){
+        //ignore - no user input
+      }else if(view instanceof FieldFreeText){
+        FieldFreeText freeTextField = (FieldFreeText) view;
+        //todo - get datafrom field view
+      }else if(view instanceof  FieldCurrentDate){
+        FieldCurrentDate currentDate = (FieldCurrentDate) view;
+        //todo - get date from field view
+      }
+
     }
   }
 }
