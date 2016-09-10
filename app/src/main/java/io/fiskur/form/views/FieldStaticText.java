@@ -50,9 +50,9 @@ public class FieldStaticText extends LinearLayout {
     }else{
       removeView(staticTextSubtitle);
     }
-    if(field.body != null && !field.body.isEmpty()){
+    if(field.text != null && !field.text.isEmpty()){
       staticTextBody.setVisibility(View.VISIBLE);
-      staticTextBody.setText(field.body);
+      staticTextBody.setText(field.text);
     }else{
       removeView(staticTextBody);
     }

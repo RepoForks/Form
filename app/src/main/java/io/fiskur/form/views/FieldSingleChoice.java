@@ -14,8 +14,6 @@ import io.fiskur.form.R;
 
 public class FieldSingleChoice extends LinearLayout{
 
-  private TextView singleChoiceTitle;
-  private TextView singleChoiceSubtitle;
   private TextView singleChoiceBody;
   private RadioGroup radioGroup;
 
@@ -35,29 +33,15 @@ public class FieldSingleChoice extends LinearLayout{
   }
 
   private void init(){
-    inflate(getContext(), R.layout.field_free_text, this);
-    singleChoiceTitle = (TextView) findViewById(R.id.single_choice_title);
-    singleChoiceSubtitle = (TextView) findViewById(R.id.single_choice_subtitle);
-    singleChoiceBody = (TextView) findViewById(R.id.single_choice_body);
+    inflate(getContext(), R.layout.field_single_choice, this);
+    singleChoiceBody = (TextView) findViewById(R.id.single_choice_text);
     radioGroup = (RadioGroup) findViewById(R.id.field_single_choice_group);
   }
 
   public void setField(Context context, Field field){
-    if(field.title != null && !field.title.isEmpty()){
-      singleChoiceTitle.setVisibility(View.VISIBLE);
-      singleChoiceTitle.setText(field.title);
-    }else{
-      removeView(singleChoiceTitle);
-    }
-    if(field.subtitle != null && !field.subtitle.isEmpty()){
-      singleChoiceSubtitle.setVisibility(View.VISIBLE);
-      singleChoiceSubtitle.setText(field.subtitle);
-    }else{
-      removeView(singleChoiceSubtitle);
-    }
-    if(field.body != null && !field.body.isEmpty()){
+    if(field.text != null && !field.text.isEmpty()){
       singleChoiceBody.setVisibility(View.VISIBLE);
-      singleChoiceBody.setText(field.body);
+      singleChoiceBody.setText(field.text);
     }else{
       removeView(singleChoiceBody);
     }

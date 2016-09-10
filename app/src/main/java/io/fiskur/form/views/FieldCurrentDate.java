@@ -38,7 +38,7 @@ public class FieldCurrentDate extends LinearLayout {
 
   public void setField(Field field){
     long now = System.currentTimeMillis();
-    String label = "<b>" + field.title + ":</b> " + SimpleDateFormat.getDateInstance().format(new Date(now));;
+    String label = "<b>" + field.text + ":</b> " + SimpleDateFormat.getDateInstance().format(new Date(now));;
     datelabel.setText(Html.fromHtml(label));
   }
 }
