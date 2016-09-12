@@ -1,4 +1,4 @@
-# Form
+# Form - in dev, not ready for use.
 Modern replacement for [ODK Collect](https://opendatakit.org/use/collect/) forms on Android.
 
 ## Android Usage
