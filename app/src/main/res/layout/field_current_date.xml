@@ -5,10 +5,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+
+
     <TextView
         android:id="@+id/current_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/field_font_title_size"/>
+        android:textSize="@dimen/field_font_body_size"/>
 
 </LinearLayout>

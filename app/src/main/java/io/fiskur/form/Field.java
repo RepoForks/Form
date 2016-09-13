@@ -6,6 +6,7 @@ import java.util.List;
 public class Field implements Serializable{
 
   public static final String TYPE_STATIC_TEXT = "STATIC_TEXT";
+  public static final String TYPE_STATIC_IMAGE = "STATIC_IMAGE";
   public static final String TYPE_CURRENT_DATE = "CURRENT_DATE";
   public static final String TYPE_DATE = "DATE";
   public static final String TYPE_TIME = "TIME";
@@ -20,7 +21,7 @@ public class Field implements Serializable{
   public String subtitle;
   public String text;
   public String type;
-  public String config;
+  public String parent = null;
   public List<Choice> choices;
   public boolean required;
   public List<Field> subfields;

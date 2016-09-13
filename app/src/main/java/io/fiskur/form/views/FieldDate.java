@@ -7,6 +7,9 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import io.fiskur.form.Field;
 import io.fiskur.form.R;
 
@@ -43,6 +46,17 @@ public class FieldDate extends LinearLayout {
     }else{
       removeView(dateTitle);
     }
+  }
+
+  public Date getFieldDate(){
+    int day = datePicker.getDayOfMonth();
+    int month = datePicker.getMonth();
+    int year =  datePicker.getYear();
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(year, month, day);
+
+    return calendar.getTime();
   }
 }
 

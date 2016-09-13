@@ -4,17 +4,24 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import io.fiskur.form.Choice;
 import io.fiskur.form.Field;
 import io.fiskur.form.R;
 
-public class FieldMutipleChoice extends LinearLayout {
+public class FieldMutipleChoice extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
 
   private TextView multiChoiceBody;
   private LinearLayout checkHolder;
+
+  private HashSet<String> selectedChoices = new HashSet<>();
 
   public FieldMutipleChoice(Context context) {
     super(context);
@@ -49,8 +56,28 @@ public class FieldMutipleChoice extends LinearLayout {
         CheckBox check = new CheckBox(context);
         check.setTag(choice.id);
         check.setText(choice.text);
+        check.setOnCheckedChangeListener(this);
         checkHolder.addView(check);
       }
     }
+  }
+
+  @Override
+  public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+    CheckBox check = (CheckBox) compoundButton;
+    String choiceId = (String) check.getTag();
+    if(checked){
+      if(!selectedChoices.contains(choiceId)){
+        selectedChoices.add(choiceId);
+      }
+    }else{
+      if(selectedChoices.contains(choiceId)){
+        selectedChoices.remove(choiceId);
+      }
+    }
+  }
+
+  public String[] getFieldSelectedChoices(){
+    return selectedChoices.toArray(new String[selectedChoices.size()]);
   }
 }

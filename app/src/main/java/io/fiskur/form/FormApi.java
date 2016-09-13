@@ -8,13 +8,6 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
 import io.fiskur.form.views.FieldCurrentDate;
 import io.fiskur.form.views.FieldDate;
 import io.fiskur.form.views.FieldDivider;
@@ -47,59 +40,89 @@ public class FormApi {
 
     root.setOrientation(LinearLayout.VERTICAL);
 
+    FormUIGraph.getInstance().setForm(form);
+    FormUIGraph.getInstance().setRootLayout(root);
+
     for(Field field : form.fields){
-      addField(context, field, root);
+      addField(context, field, root, false);
     }
   }
 
-  private void addField(Context context, Field field, LinearLayout root){
+  private void addField(Context context, Field field, LinearLayout root, boolean isSubfield){
     l("Adding field of type: " + field.type);
     switch(field.type){
       case Field.TYPE_DIVIDER:
         FieldDivider div = new FieldDivider(context);
         div.setTag(field.id);
+        if(isSubfield){
+          div.setVisibility(View.GONE);
+        }
         root.addView(div);
         break;
       case Field.TYPE_STATIC_TEXT:
         FieldStaticText staticText = new FieldStaticText(context);
         staticText.setTag(field.id);
         staticText.setField(field);
+        if(isSubfield){
+          staticText.setVisibility(View.GONE);
+        }
         root.addView(staticText);
         break;
       case Field.TYPE_FREE_TEXT:
         FieldFreeText freeText = new FieldFreeText(context);
         freeText.setTag(field.id);
         freeText.setField(field);
+        if(isSubfield){
+          freeText.setVisibility(View.GONE);
+        }
         root.addView(freeText);
         break;
       case Field.TYPE_CURRENT_DATE:
         FieldCurrentDate currentDate = new FieldCurrentDate(context);
         currentDate.setTag(field.id);
         currentDate.setField(field);
+        if(isSubfield){
+          currentDate.setVisibility(View.GONE);
+        }
         root.addView(currentDate);
         break;
       case Field.TYPE_DATE:
         FieldDate date = new FieldDate(context);
         date.setTag(field.id);
         date.setField(field);
+        if(isSubfield){
+          date.setVisibility(View.GONE);
+        }
         root.addView(date);
         break;
       case Field.TYPE_TIME:
         FieldTime time = new FieldTime(context);
         time.setTag(field.id);
         time.setField(field);
+        if(isSubfield){
+          time.setVisibility(View.GONE);
+        }
         root.addView(time);
         break;
       case Field.TYPE_SINGLE_CHOICE:
         FieldSingleChoice singleChoice = new FieldSingleChoice(context);
         singleChoice.setTag(field.id);
         singleChoice.setField(context, field);
+        if(field.hasSubfields()) {
+          singleChoice.setFieldListener(FormUIGraph.getInstance());
+        }
+        if(isSubfield){
+          singleChoice.setVisibility(View.GONE);
+        }
         root.addView(singleChoice);
         break;
       case Field.TYPE_MULTI_CHOICE:
         FieldMutipleChoice multiChoice = new FieldMutipleChoice(context);
         multiChoice.setTag(field.id);
         multiChoice.setField(context, field);
+        if(isSubfield){
+          multiChoice.setVisibility(View.GONE);
+        }
         root.addView(multiChoice);
         break;
     }
@@ -107,7 +130,7 @@ public class FormApi {
     //todo - create mechanism to toggle subfield visibility based on responses
     if(field.hasSubfields()){
       for(Field subfield : field.subfields){
-        addField(context, field, root);
+        addField(context, subfield, root, true);
       }
     }
   }

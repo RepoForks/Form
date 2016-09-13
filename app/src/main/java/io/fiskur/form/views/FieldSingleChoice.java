@@ -10,12 +10,15 @@ import android.widget.TextView;
 
 import io.fiskur.form.Choice;
 import io.fiskur.form.Field;
+import io.fiskur.form.FieldListener;
 import io.fiskur.form.R;
 
 public class FieldSingleChoice extends LinearLayout{
 
   private TextView singleChoiceBody;
   private RadioGroup radioGroup;
+
+  private FieldListener fieldListener = null;
 
   public FieldSingleChoice(Context context) {
     super(context);
@@ -38,6 +41,10 @@ public class FieldSingleChoice extends LinearLayout{
     radioGroup = (RadioGroup) findViewById(R.id.field_single_choice_group);
   }
 
+  public void setFieldListener(FieldListener fieldListener){
+    this.fieldListener = fieldListener;
+  }
+
   public void setField(Context context, Field field){
     if(field.text != null && !field.text.isEmpty()){
       singleChoiceBody.setVisibility(View.VISIBLE);
@@ -52,6 +59,29 @@ public class FieldSingleChoice extends LinearLayout{
         choiceButton.setTag(choice.id);
         radioGroup.addView(choiceButton);
       }
+    }
+
+    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+      public void onCheckedChanged(RadioGroup group, int checkedId) {
+        RadioButton radio = (RadioButton)group.findViewById(checkedId);
+         if(fieldListener != null){
+          if(radio.isChecked()){
+            fieldListener.choiceSelected((String)FieldSingleChoice.this.getTag(), (String)radio.getTag());
+          }else{
+            fieldListener.choiceDeselected((String)FieldSingleChoice.this.getTag(), (String)radio.getTag());
+          }
+        }
+      }
+    });
+  }
+
+  public String getFieldSelectedChoice(){
+    int radioButtonID = radioGroup.getCheckedRadioButtonId();
+    View radioButton = radioGroup.findViewById(radioButtonID);
+    if(radioButton != null){
+      return (String)radioButton.getTag();
+    }else{
+      return null;
     }
   }
 }

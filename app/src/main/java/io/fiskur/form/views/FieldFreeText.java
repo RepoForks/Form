@@ -44,4 +44,8 @@ public class FieldFreeText extends LinearLayout {
       removeView(freeTextTitle);
     }
   }
+
+  public String getFieldText(){
+    return freeTextEdit.getText().toString();
+  }
 }
