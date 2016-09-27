@@ -23,7 +23,10 @@ public class FormApi {
 
   private static final FormApi instance = new FormApi();
 
-  protected FormApi() {
+  private FormUIGraph formUIGraph;
+
+  public FormApi() {
+    formUIGraph = new FormUIGraph();
   }
 
   public static FormApi getInstance() {
@@ -32,16 +35,15 @@ public class FormApi {
 
   public Form createForm(String jsonForm){
     Gson gson = new GsonBuilder().create();
-    Form form = gson.fromJson(jsonForm, Form.class);
-    return form;
+    return gson.fromJson(jsonForm, Form.class);
   }
 
   public void buildViews(Context context, Form form, LinearLayout root){
 
     root.setOrientation(LinearLayout.VERTICAL);
 
-    FormUIGraph.getInstance().setForm(form);
-    FormUIGraph.getInstance().setRootLayout(root);
+    formUIGraph.setForm(form);
+    formUIGraph.setRootLayout(root);
 
     for(Field field : form.fields){
       addField(context, field, root, false);
@@ -109,7 +111,7 @@ public class FormApi {
         singleChoice.setTag(field.id);
         singleChoice.setField(context, field);
         if(field.hasSubfields()) {
-          singleChoice.setFieldListener(FormUIGraph.getInstance());
+          singleChoice.setFieldListener(formUIGraph);
         }
         if(isSubfield){
           singleChoice.setVisibility(View.GONE);
@@ -120,6 +122,9 @@ public class FormApi {
         FieldMutipleChoice multiChoice = new FieldMutipleChoice(context);
         multiChoice.setTag(field.id);
         multiChoice.setField(context, field);
+        if(field.hasSubfields()) {
+          multiChoice.setFieldListener(formUIGraph);
+        }
         if(isSubfield){
           multiChoice.setVisibility(View.GONE);
         }
@@ -127,7 +132,6 @@ public class FormApi {
         break;
     }
     //recursively add subfields
-    //todo - create mechanism to toggle subfield visibility based on responses
     if(field.hasSubfields()){
       for(Field subfield : field.subfields){
         addField(context, subfield, root, true);
@@ -135,7 +139,7 @@ public class FormApi {
     }
   }
 
-  //todo...
+  //todo... work in progress
   public void getResponses(Context context, Form form, LinearLayout root){
     final int childcount = root.getChildCount();
     for (int i = 0; i < childcount; i++) {

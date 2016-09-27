@@ -14,6 +14,7 @@ import java.util.List;
 
 import io.fiskur.form.Choice;
 import io.fiskur.form.Field;
+import io.fiskur.form.FieldListener;
 import io.fiskur.form.R;
 
 public class FieldMutipleChoice extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
@@ -22,6 +23,8 @@ public class FieldMutipleChoice extends LinearLayout implements CompoundButton.O
   private LinearLayout checkHolder;
 
   private HashSet<String> selectedChoices = new HashSet<>();
+
+  private FieldListener fieldListener = null;
 
   public FieldMutipleChoice(Context context) {
     super(context);
@@ -42,6 +45,11 @@ public class FieldMutipleChoice extends LinearLayout implements CompoundButton.O
     inflate(getContext(), R.layout.field_multi_choice, this);
     multiChoiceBody = (TextView) findViewById(R.id.multi_choice_text);
     checkHolder = (LinearLayout) findViewById(R.id.multi_choice_check_holder);
+  }
+
+
+  public void setFieldListener(FieldListener fieldListener){
+    this.fieldListener = fieldListener;
   }
 
   public void setField(Context context, Field field){

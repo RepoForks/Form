@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="300dp"
+              android:background="#efefef"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+    >
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:alignmentMode="alignMargins"
+        app:columnCount="4"
+        app:columnOrderPreserved="true"
+        app:useDefaultMargins="true">
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/date"
+            android:text="Current Date"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/date_add"
+            android:text="Date"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/div"
+            android:text="Divider"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/static_text"
+            android:text="Free Text"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/check"
+            android:text="Multiple Choice"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/radio"
+            android:text="Single Choice"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/image"
+            android:text="Image"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/label"
+            android:text="Text"/>
+
+        <ImageButton
+            android:layout_width="@dimen/add_button_size"
+            android:layout_height="@dimen/add_button_size"
+            app:layout_columnWeight="1"
+            app:layout_columnSpan="1"
+            app:layout_rowSpan="1"
+            app:srcCompat="@drawable/time"
+            android:text="Time"/>
+
+    </android.support.v7.widget.GridLayout>
+
+</LinearLayout>

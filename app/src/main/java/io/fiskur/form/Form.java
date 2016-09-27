@@ -10,5 +10,5 @@ public class Form implements Serializable {
   public String time;
   public String author;
   public String contact;
-  public List<Field> fields;
+  public List<Field> fields = null;
 }

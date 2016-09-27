@@ -7,16 +7,10 @@ public class FormUIGraph implements FieldListener {
 
   private static final String TAG = "FormUIGraph";
 
-  private static final FormUIGraph instance = new FormUIGraph();
-
   private Form form = null;
   private LinearLayout root = null;
 
-  protected FormUIGraph() {
-  }
-
-  public static FormUIGraph getInstance() {
-    return instance;
+  public FormUIGraph() {
   }
 
   public void setForm(Form form){
@@ -27,6 +21,7 @@ public class FormUIGraph implements FieldListener {
     this.root = root;
   }
 
+  //Single choice/RadioButton Group toggled:
   @Override
   public void choiceSelected(String fieldId, String choiceId) {
     Field field = findField(fieldId);
@@ -34,36 +29,59 @@ public class FormUIGraph implements FieldListener {
       return;
     }
 
-    //todo - this whole block is massivly inefficient:
-    if(field.hasSubfields()){
+    toggleVisibilities(field, choiceId, true);
+  }
+
+  //Checkboxes:
+  @Override
+  public void choiceDeselected(String fieldId, String choiceId) {
+    //not needed - as we have a mandatory single choice subfields visibility will be handled when alternative is selected
+  }
+
+  @Override
+  public void checkSelected(String fieldId, String choiceId) {
+    Field field = findField(fieldId);
+    if(field == null){
+      return;
+    }
+
+    toggleVisibilities(field, choiceId, true);
+  }
+
+  @Override
+  public void checkDeselected(String fieldId, String choiceId) {
+    Field field = findField(fieldId);
+    if(field == null){
+      return;
+    }
+
+    toggleVisibilities(field, choiceId, false);
+  }
+
+  //todo - could be nested choices (which isn't supported here yet), this is nested fields:
+  private void toggleVisibilities(Field field, String choiceId, boolean choiceSelected){
+    if(field.hasSubfields()) {
       int fieldCount = root.getChildCount();
-      for(Field subfield : field.subfields){
-        if(subfield.parent != null && subfield.parent.equals(choiceId)){
+      for (Field subfield : field.subfields) {
+        if (subfield.parent != null && subfield.parent.equals(choiceId)) {
           //show subfield
-          for(int i = 0 ; i < fieldCount ; i++){
+          for (int i = 0; i < fieldCount; i++) {
             View view = root.getChildAt(i);
-            if(subfield.id.equals(view.getTag())){
+            if (subfield.id.equals(view.getTag())) {
               view.setVisibility(View.VISIBLE);
             }
           }
-        }else{
+        } else {
           //hide subfield
-          for(int i = 0 ; i < fieldCount ; i++){
+          for (int i = 0; i < fieldCount; i++) {
             View view = root.getChildAt(i);
-            if(subfield.id.equals((String)view.getTag())){
+            if (subfield.id.equals((String) view.getTag())) {
               view.setVisibility(View.GONE);
             }
           }
         }
-
-        //todo - could be nested choices, not nested fields
       }
     }
-  }
-
-  @Override
-  public void choiceDeselected(String fieldId, String choiceId) {
-
   }
 
   private Field findField(String fieldId){
