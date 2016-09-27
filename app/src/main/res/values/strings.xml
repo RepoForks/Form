@@ -4,4 +4,20 @@
     <string name="title_activity_tab">TabActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="add_dialog_title_current_date">Current Date Field</string>
+    <string name="add_dialog_context_current_date">Current Date Label</string>
+    <string name="add_dialog_hint_current_date">Current date</string>
+
+    <string name="add_dialog_title_date">Date Field</string>
+    <string name="add_dialog_context_date">Date Label</string>
+    <string name="add_dialog_hint_date">Enter date</string>
+
+    <string name="add_dialog_title_time">Time Field</string>
+    <string name="add_dialog_context_time">Time Label</string>
+    <string name="add_dialog_hint_time">Enter time</string>
+
+    <string name="add_dialog_title_image">Image Field</string>
+    <string name="add_dialog_context_image">Image Url</string>
+    <string name="add_dialog_hint_image">http://</string>
 </resources>
