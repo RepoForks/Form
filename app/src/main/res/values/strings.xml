@@ -3,6 +3,7 @@
     <string name="title_activity_creator">Form Creator</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="action_controls">Show/Hide Controls</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="add_dialog_title_current_date">Current Date Field</string>
@@ -20,4 +21,7 @@
     <string name="add_dialog_title_image">Image Field</string>
     <string name="add_dialog_context_image">Image Url</string>
     <string name="add_dialog_hint_image">http://</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -28,11 +28,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -48,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:fitsSystemWindows="true"
-        app:behavior_hideable="false"
+        app:behavior_hideable="true"
         app:behavior_peekHeight="160dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
         <include layout="@layout/creator_bottom_sheet" />

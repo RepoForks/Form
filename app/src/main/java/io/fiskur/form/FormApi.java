@@ -40,6 +40,11 @@ public class FormApi {
 
   public void buildViews(Context context, Form form, LinearLayout root){
 
+    if(root == null){
+      Log.e(TAG, "Root LinearLayout is null");
+      return;
+    }
+
     root.setOrientation(LinearLayout.VERTICAL);
 
     formUIGraph.setForm(form);
