@@ -13,6 +13,7 @@ import io.fiskur.form.R;
 import io.fiskur.form.dragdrop.ItemTouchHelperAdapter;
 import io.fiskur.form.dragdrop.ItemTouchHelperViewHolder;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
   private List<Field> fields;
   private final OverviewFragment.OnListFragmentInteractionListener mListener;
 
-  public OverviewRecyclerViewAdapter(List<Field> items, OverviewFragment.OnListFragmentInteractionListener listener) {
-    fields = items;
+  public OverviewRecyclerViewAdapter(OverviewFragment.OnListFragmentInteractionListener listener) {
+    fields = new ArrayList<>();
     mListener = listener;
   }
 

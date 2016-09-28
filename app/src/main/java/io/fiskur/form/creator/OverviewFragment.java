@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import io.fiskur.form.Field;
 import io.fiskur.form.R;
-import io.fiskur.form.creator.dummy.DummyContent;
 import io.fiskur.form.dragdrop.OnStartDragListener;
 import io.fiskur.form.dragdrop.SimpleItemTouchHelperCallback;
 
@@ -38,7 +37,7 @@ public class OverviewFragment extends Fragment implements OnStartDragListener {
     Context context = view.getContext();
     RecyclerView recyclerView = (RecyclerView) view;
     recyclerView.setLayoutManager(new LinearLayoutManager(context));
-    adapter = new OverviewRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+    adapter = new OverviewRecyclerViewAdapter(mListener);
     adapter.setItems(Preview.form.fields);
     recyclerView.setAdapter(adapter);
 
