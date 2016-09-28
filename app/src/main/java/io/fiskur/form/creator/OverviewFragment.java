@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import io.fiskur.form.dragdrop.OnStartDragListener;
 import io.fiskur.form.dragdrop.SimpleItemTouchHelperCallback;
 
 public class OverviewFragment extends Fragment implements OnStartDragListener {
-
+  private static final String TAG = "OverviewFragment";
   private OnListFragmentInteractionListener mListener;
   private ItemTouchHelper itemTouchHelper;
 
@@ -37,7 +38,7 @@ public class OverviewFragment extends Fragment implements OnStartDragListener {
     Context context = view.getContext();
     RecyclerView recyclerView = (RecyclerView) view;
     recyclerView.setLayoutManager(new LinearLayoutManager(context));
-    adapter = new OverviewRecyclerViewAdapter(mListener);
+    adapter = new OverviewRecyclerViewAdapter(mListener, this);
     adapter.setItems(Preview.form.fields);
     recyclerView.setAdapter(adapter);
 
@@ -76,6 +77,7 @@ public class OverviewFragment extends Fragment implements OnStartDragListener {
   }
 
   public void update(){
+    Log.d(TAG, "update()");
     if(adapter != null) {
       adapter.setItems(Preview.form.fields);
     }

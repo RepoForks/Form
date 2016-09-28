@@ -31,6 +31,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
 
   private OverviewFragment overviewFragment = null;
   private PreviewFragment previewFragment = null;
+  private JsonFragment jsonFragment = null;
 
   private ImageButton addCurrentDateButton;
   private ImageButton addDateEntryButton;
@@ -94,16 +95,26 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
     viewPager.setAdapter(creatorPagerAdapter);
     tabs.setupWithViewPager(viewPager);
 
-
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
       }
     });
+    fab.setVisibility(View.GONE);
 
-
+    viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+      @Override
+      public void onPageSelected(int position) {
+        if(position == 1){
+          ViewTools.show(fab, 400);
+          jsonFragment.update();
+        }else{
+          ViewTools.hide(fab, 800);
+        }
+      }
+    });
   }
 
   @Override
@@ -230,7 +241,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
         overviewFragment.update();
         break;
       case 1:
-
+        jsonFragment.update();
         break;
       case 2:
         previewFragment.update();
@@ -259,8 +270,11 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
           overviewFragment.update();
           return overviewFragment;
         case 1:
-          //todo
-          return TabActivity.PlaceholderFragment.newInstance(position + 1);
+          if(jsonFragment == null){
+            jsonFragment = new JsonFragment();
+          }
+          jsonFragment.update();
+          return jsonFragment;
         case 2:
           if(previewFragment == null){
             previewFragment = new PreviewFragment();

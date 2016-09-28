@@ -1,17 +1,21 @@
 package io.fiskur.form.creator;
 
 import android.graphics.Color;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import io.fiskur.form.Field;
 import io.fiskur.form.R;
 import io.fiskur.form.dragdrop.ItemTouchHelperAdapter;
 import io.fiskur.form.dragdrop.ItemTouchHelperViewHolder;
+import io.fiskur.form.dragdrop.OnStartDragListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,10 +25,12 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
 
   private List<Field> fields;
   private final OverviewFragment.OnListFragmentInteractionListener mListener;
+  private final OnStartDragListener mDragStartListener;
 
-  public OverviewRecyclerViewAdapter(OverviewFragment.OnListFragmentInteractionListener listener) {
+  public OverviewRecyclerViewAdapter(OverviewFragment.OnListFragmentInteractionListener listener, OnStartDragListener dragStartListener) {
     fields = new ArrayList<>();
     mListener = listener;
+    mDragStartListener = dragStartListener;
   }
 
   public void setItems(List<Field> fields){
@@ -54,6 +60,17 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
         }
       }
     });
+
+    // Start a drag whenever the handle view it touched
+    holder.handleView.setOnTouchListener(new View.OnTouchListener() {
+      @Override
+      public boolean onTouch(View v, MotionEvent event) {
+        if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+          mDragStartListener.onStartDrag(holder);
+        }
+        return false;
+      }
+    });
   }
 
   @Override
@@ -78,15 +95,17 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
     public final View mView;
     public final TextView mIdView;
     public final TextView mContentView;
-    public final LinearLayout layout;
+    public final RelativeLayout layout;
     public Field mItem;
+    public final ImageView handleView;
 
     public ViewHolder(View view) {
       super(view);
       mView = view;
       mIdView = (TextView) view.findViewById(R.id.id);
       mContentView = (TextView) view.findViewById(R.id.content);
-      layout = (LinearLayout)view.findViewById(R.id.the_row);
+      layout = (RelativeLayout)view.findViewById(R.id.the_row);
+      handleView = (ImageView) itemView.findViewById(R.id.handle);
     }
 
     @Override
