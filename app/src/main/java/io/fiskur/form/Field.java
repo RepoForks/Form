@@ -34,6 +34,55 @@ public class Field implements Serializable{
     }
   }
 
+  public String getPreviewLabel(){
+    StringBuilder sb = new StringBuilder();
+    sb.append(id);
+    sb.append(": ");
+    switch(type){
+      case TYPE_STATIC_TEXT:
+        if(title != null && !title.isEmpty()){
+          sb.append(title);
+          if((subtitle != null && !subtitle.isEmpty()) || (text != null && !text.isEmpty())){
+            sb.append(" > ");
+          }
+        }
+        if(subtitle != null && !subtitle.isEmpty()){
+          sb.append(subtitle);
+          if(text != null && !text.isEmpty()){
+            sb.append(" > ");
+          }
+        }
+        if(text != null && !text.isEmpty()){
+          sb.append(text);
+        }
+        break;
+      case TYPE_STATIC_IMAGE:
+      case TYPE_CURRENT_DATE:
+      case TYPE_DATE:
+      case TYPE_TIME:
+      case TYPE_FREE_TEXT:
+        sb.append(text);
+        break;
+      case TYPE_DIVIDER:
+        sb.append("------------------------------------------------------------------------------");
+        break;
+      case TYPE_YES_NO:
+        sb.append("YES_NO to do");
+        break;
+      case TYPE_SINGLE_CHOICE:
+        sb.append("TYPE_SINGLE_CHOICE to do");
+        break;
+      case TYPE_MULTI_CHOICE:
+        sb.append("TYPE_MULTI_CHOICE to do");
+        break;
+      default:
+        sb.append("Unknown field type");
+
+    }
+    
+    return  sb.toString();
+  }
+
   @Override
   public String toString() {
     return id + ": " + type;

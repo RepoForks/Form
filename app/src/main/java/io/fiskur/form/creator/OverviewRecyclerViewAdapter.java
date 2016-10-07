@@ -24,13 +24,13 @@ import java.util.List;
 public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRecyclerViewAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
   private List<Field> fields;
-  private final OverviewFragment.OnListFragmentInteractionListener mListener;
-  private final OnStartDragListener mDragStartListener;
+  private final OverviewFragment.OnListFragmentInteractionListener interactionListener;
+  private final OnStartDragListener startDragListener;
 
   public OverviewRecyclerViewAdapter(OverviewFragment.OnListFragmentInteractionListener listener, OnStartDragListener dragStartListener) {
     fields = new ArrayList<>();
-    mListener = listener;
-    mDragStartListener = dragStartListener;
+    interactionListener = listener;
+    startDragListener = dragStartListener;
   }
 
   public void setItems(List<Field> fields){
@@ -46,17 +46,14 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, int position) {
-    holder.mItem = fields.get(position);
-    holder.mIdView.setText(fields.get(position).id);
-    holder.mContentView.setText(fields.get(position).toString());
+    holder.field = fields.get(position);
+    holder.contentView.setText(fields.get(position).getPreviewLabel());
 
-    holder.mView.setOnClickListener(new View.OnClickListener() {
+    holder.view.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (null != mListener) {
-          // Notify the active callbacks interface (the activity, if the
-          // fragment is attached to one) that an item has been selected.
-          mListener.onListFragmentInteraction(holder.mItem);
+        if (null != interactionListener) {
+          interactionListener.onListFragmentInteraction(holder.field);
         }
       }
     });
@@ -66,7 +63,7 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
       @Override
       public boolean onTouch(View v, MotionEvent event) {
         if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-          mDragStartListener.onStartDrag(holder);
+          startDragListener.onStartDrag(holder);
         }
         return false;
       }
@@ -92,25 +89,23 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
   }
 
   public class ViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
-    public final View mView;
-    public final TextView mIdView;
-    public final TextView mContentView;
+    public final View view;
+    public final TextView contentView;
     public final RelativeLayout layout;
-    public Field mItem;
+    public Field field;
     public final ImageView handleView;
 
     public ViewHolder(View view) {
       super(view);
-      mView = view;
-      mIdView = (TextView) view.findViewById(R.id.id);
-      mContentView = (TextView) view.findViewById(R.id.content);
+      this.view = view;
+      contentView = (TextView) view.findViewById(R.id.content);
       layout = (RelativeLayout)view.findViewById(R.id.the_row);
       handleView = (ImageView) itemView.findViewById(R.id.handle);
     }
 
     @Override
     public String toString() {
-      return super.toString() + " '" + mContentView.getText() + "'";
+      return super.toString() + " '" + contentView.getText() + "'";
     }
 
     @Override

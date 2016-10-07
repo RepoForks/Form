@@ -1,6 +1,7 @@
 package io.fiskur.form.creator;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,8 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import io.fiskur.form.Field;
 import io.fiskur.form.Form;
@@ -172,7 +176,10 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               Preview.form.fields.add(currentDateField);
               updateTabs();
             }
-          }).show();
+          })
+        .positiveText(R.string.add)
+        .negativeText(R.string.cancel)
+        .show();
     }else if(view == addDateEntryButton){
       new MaterialDialog.Builder(this)
           .title(R.string.add_dialog_title_date)
@@ -187,7 +194,10 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               Preview.form.fields.add(dateField);
               updateTabs();
             }
-          }).show();
+          })
+        .positiveText(R.string.add)
+        .negativeText(R.string.cancel)
+        .show();
     }else if(view == addDivButton){
       Field divField = new Field();
       divField.id = getNewId();
@@ -195,7 +205,39 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
       Preview.form.fields.add(divField);
       updateTabs();
     }else if(view == addStaticTextButton){
+      new MaterialDialog.Builder(this)
+        .title(R.string.add_dialog_static_text)
+        .customView(R.layout.creator_dialog_static_text, true)
+        .positiveText(R.string.add)
+        .negativeText(R.string.cancel)
+        .onPositive(new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            View view = dialog.getCustomView();
+            Field staticTextField = new Field();
+            staticTextField.id = getNewId();
+            staticTextField.type = Field.TYPE_STATIC_TEXT;
 
+            EditText titleEdit = (EditText) view.findViewById(R.id.static_text_title);
+            if(!titleEdit.getText().toString().isEmpty()){
+              staticTextField.title = titleEdit.getText().toString();
+            }
+
+            EditText subtitleEdit = (EditText) view.findViewById(R.id.static_text_subtitle);
+            if(!subtitleEdit.getText().toString().isEmpty()){
+              staticTextField.subtitle = subtitleEdit.getText().toString();
+            }
+
+            EditText contentEdit = (EditText) view.findViewById(R.id.static_text_content);
+            if(!contentEdit.getText().toString().isEmpty()){
+              staticTextField.text = contentEdit.getText().toString();
+            }
+
+            Preview.form.fields.add(staticTextField);
+            updateTabs();
+          }
+        })
+        .show();
     }else if(view == addMultiChoiceButton){
 
     }else if(view == addSingleChoiceButton){
@@ -214,7 +256,10 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               Preview.form.fields.add(imageField);
               updateTabs();
             }
-          }).show();
+          })
+        .positiveText(R.string.add)
+        .negativeText(R.string.cancel)
+        .show();
     }else if(view == addTextEntryButton){
 
     }else if(view == addTimeButton){
@@ -231,7 +276,10 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               Preview.form.fields.add(timeField);
               updateTabs();
             }
-          }).show();
+          })
+        .positiveText(R.string.add)
+        .negativeText(R.string.cancel)
+        .show();
     }
   }
 
