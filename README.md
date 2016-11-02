@@ -53,7 +53,7 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
 {
   "id": "Q4",
   "title": "Did anyone go fishing for octopus today?",
-  "type": "YES_NO",
+  "type": "BINARY_CHOICE",
   "options": [
     {
       "id": "Q4N",
@@ -92,93 +92,58 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
 
 ## Nesting
 
-Sub-Fields can be displayed based on the response to a single, multi-choice, or binary field by specifying the id of the parent choice.  
-Fields can rely on a parent or the answers within a field can specify the parent, this way you can display entirely different fields based on a response, or just change which choices to display.
+Different paths can be displayed based on the response to a single, multi-choice, or binary field. In order to keep the json relatively flat in structure a choice object defines a subgroup id which is displayed when that option is selected. Subgroups are held in an array at the top level, this way you can create complex form graphs without confusing heavily indented nested json.
 
-### Nested Choices
+Simple example with a single top-level field showing two alternative paths a form could take:
 
 ```json
 {
-  "id": "Q4",
-  "title": "Did you use public transport today?",
-  "type": "YES_NO",
-  "options": [
+  "id": "DEMO001",
+  "title": "Octopus Monitoring",
+  "date": "02112016",
+  "time": "11:32",
+  "author": "Jonathan Fisher",
+  "contact": "jonathan@fiskur.eu",
+  "fields": [
     {
-      "id": "PTRANSNO",
-      "text": "No"
-    },
-    {
-    "id": "PTRANSYES",
-    "text": "Yes"
-    }
-  ],
-  "subfields": [
-    {
-      "id": "Q3",
-      "title": "Transport Method",
-      "subtitle": "Select all transport methods you used today",
-      "type": "MULTI_CHOICE",
-      "options": [
+      "id": "DEMO001_FISHTODAY",
+      "type": "BINARY_CHOICE",
+      "text": "Did anyone go fishing for octopus today?",
+      "choices":
+      [
         {
-          "id": "PRIVTRANSA",
-          "parent": "PTRANSNO",
-          "text": "Walking"
+          "id": "DEMO001_FISHTODAY_NO",
+          "text": "No",
+          "subgroupId": "DEMO001_FISHTODAY_NO_SG"
         },
         {
-          "id": "PRIVTRANSB",
-          "parent": "PTRANSNO",
-          "text": "Cycling"
-        },
-        {
-          "id": "PRIVTRANSC",
-          "parent": "PTRANSNO",
-          "text": "Car"
-        },
-        {
-          "id": "POBTRANSA",
-          "parent": "PTRANSYES",
-          "text": "Bus"
-        },
-        {
-          "id": "POBTRANSB",
-          "parent": "PTRANSYES",
-          "text": "Train"
-        },
+          "id": "DEMO001_FISHTODAY_YES",
+          "text": "Yes",
+          "subgroupId": "DEMO001_FISHTODAY_YES_SG"
+        }
       ]
     }
-  ]
-}
-```
-
-### Nested Fields
-
-```json
-{
-  "id": "Q4",
-  "title": "Did you use public transport today?",
-  "type": "TOGGLE_BUTTON",
-  "options": [
-    {
-      "id": "PTRANSNO",
-      "text": "No"
-    },
-    {
-    "id": "PTRANSYES",
-    "text": "Yes"
-    }
   ],
-  "subfields": [
+  "subgroups": [
     {
-      "id": "Q3",
-      "title": "Describe the public transport you used",
-      "parent": "PTRANSYES",
-      "type": "FREE_TEXT"
+      "id": "DEMO001_FISHTODAY_NO_SG",
+      "fields": [
+        {
+          "id": "S1",
+          "type": "STATIC_TEXT",
+          "title": "Fishing Today: No"
+        }
+      ]
     },
     {
-      "id": "Q3",
-      "title": "Why didn't you use public transport?",
-      "parent": "PTRANSNO",
-      "type": "FREE_TEXT"
+      "id": "DEMO001_FISHTODAY_YES_SG",
+      "fields": [
+        {
+          "id": "S2",
+          "type": "STATIC_TEXT",
+          "title": "Fishing Today: Yes"
+        }
+      ]
     }
   ]
 }
@@ -194,6 +159,18 @@ A simple non-interactive horizontal divider to seperate two other fields.
 {
   "id": "D1",
   "type": "DIVIDER"
+}
+```
+
+### Spacer
+
+Invisible field to provide vertical spacing where needed.
+
+```json
+{
+  "id": "SP1",
+  "type": "SPACER",
+  "config": "160"
 }
 ```
 
