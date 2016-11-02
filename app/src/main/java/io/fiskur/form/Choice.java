@@ -6,4 +6,5 @@ public class Choice implements Serializable{
   public String id;
   public String text;
   public String parentId;
+  public String subgroupId;
 }

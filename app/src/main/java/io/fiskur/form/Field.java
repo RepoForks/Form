@@ -12,13 +12,16 @@ public class Field implements Serializable{
   public static final String TYPE_TIME = "TIME";
   public static final String TYPE_YES_NO = "YES_NO";
   public static final String TYPE_DIVIDER = "DIVIDER";
+  public static final String TYPE_SPACER = "SPACER";
   public static final String TYPE_SINGLE_CHOICE = "SINGLE_CHOICE";
   public static final String TYPE_MULTI_CHOICE = "MULTI_CHOICE";
+  public static final String TYPE_BINARY_CHOICE = "BINARY_CHOICE";
   public static final String TYPE_FREE_TEXT = "FREE_TEXT";
 
   public String id;
   public String title;
   public String subtitle;
+  public String config;
   public String text;
   public String type;
   public String parent = null;
@@ -64,7 +67,7 @@ public class Field implements Serializable{
         sb.append(text);
         break;
       case TYPE_DIVIDER:
-        sb.append("------------------------------------------------------------------------------");
+        sb.append("--------------------------------------------------------");
         break;
       case TYPE_YES_NO:
         sb.append("YES_NO to do");
@@ -79,7 +82,7 @@ public class Field implements Serializable{
         sb.append("Unknown field type");
 
     }
-    
+
     return  sb.toString();
   }
 

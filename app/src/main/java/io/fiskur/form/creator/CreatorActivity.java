@@ -239,7 +239,26 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
         })
         .show();
     }else if(view == addMultiChoiceButton){
+      new MaterialDialog.Builder(this)
+        .title(R.string.add_dialog_static_text)
+        .customView(R.layout.creator_dialog_static_text, true)
+        .positiveText(R.string.add)
+        .negativeText(R.string.cancel)
+        .onPositive(new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            View view = dialog.getCustomView();
+            Field multiChoiceField = new Field();
+            multiChoiceField.id = getNewId();
+            multiChoiceField.type = Field.TYPE_MULTI_CHOICE;
 
+            //todo
+
+            Preview.form.fields.add(multiChoiceField);
+            updateTabs();
+          }
+        })
+        .show();
     }else if(view == addSingleChoiceButton){
 
     }else if(view == addImageButton){

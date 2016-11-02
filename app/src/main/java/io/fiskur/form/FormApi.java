@@ -8,12 +8,14 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.fiskur.form.views.FieldBinary;
 import io.fiskur.form.views.FieldCurrentDate;
 import io.fiskur.form.views.FieldDate;
 import io.fiskur.form.views.FieldDivider;
 import io.fiskur.form.views.FieldFreeText;
 import io.fiskur.form.views.FieldMutipleChoice;
 import io.fiskur.form.views.FieldSingleChoice;
+import io.fiskur.form.views.FieldSpacer;
 import io.fiskur.form.views.FieldStaticText;
 import io.fiskur.form.views.FieldTime;
 
@@ -66,6 +68,20 @@ public class FormApi {
         }
         root.addView(div);
         break;
+      case Field.TYPE_SPACER:
+        int height = 20;
+        try {
+          height = Integer.parseInt(field.config);
+        }catch(NumberFormatException nfe){
+          l("NumberFormatException spacer config: " + nfe);
+        }
+        FieldSpacer spacer = new FieldSpacer(context, height);
+        spacer.setTag(field.id);
+        if(isSubfield){
+          spacer.setVisibility(View.GONE);
+        }
+        root.addView(spacer);
+        break;
       case Field.TYPE_STATIC_TEXT:
         FieldStaticText staticText = new FieldStaticText(context);
         staticText.setTag(field.id);
@@ -110,6 +126,18 @@ public class FormApi {
           time.setVisibility(View.GONE);
         }
         root.addView(time);
+        break;
+      case Field.TYPE_BINARY_CHOICE:
+        FieldBinary binary = new FieldBinary(context);
+        binary.setTag(field.id);
+        binary.setField(context, field);
+        if(field.hasSubfields()) {
+          binary.setFieldListener(formUIGraph);
+        }
+        if(isSubfield){
+          binary.setVisibility(View.GONE);
+        }
+        root.addView(binary);
         break;
       case Field.TYPE_SINGLE_CHOICE:
         FieldSingleChoice singleChoice = new FieldSingleChoice(context);
