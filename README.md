@@ -332,6 +332,42 @@ Example dictionary:
 }
 ```
 
+### Android Implementation Details
+
+Some notes on how the json is interpreted, the Form object is created by serialising with Gson:
+
+```java
+public Form createForm(String jsonForm){
+  Gson gson = new GsonBuilder().create();
+  return gson.fromJson(jsonForm, Form.class);
+}
+```
+
+The implementation then passes a LinearLayout to buildView which creates the ui:
+
+```java
+public void buildViews(Context context, Form form, LinearLayout root){
+//...
+```
+
+If a field contains subfields (if a choice object contains a subgroupId) then an empty LinearLayout is added beneath ready to populate when the users selected a choice, the subfield holder layout tag is the field id plus '_holder':
+
+```java
+if(field.hasSubfields()){
+  LinearLayout subfieldHolder = new LinearLayout(context);
+  subfieldHolder.setOrientation(LinearLayout.VERTICAL);
+  subfieldHolder.setTag(String.format("%s_holder", field.id));
+
+  LinearLayout.LayoutParams subfieldHolderLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+  subfieldHolder.setLayoutParams(subfieldHolderLayoutParams);
+  root.addView(subfieldHolder);
+}
+```
+
+
+
+
+
 
 
 
