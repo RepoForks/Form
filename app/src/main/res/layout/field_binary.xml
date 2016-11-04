@@ -19,12 +19,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!--             android:theme="@style/ToggleSwitchTheme"
+        <!--
  -->
         <ToggleButton
             android:id="@+id/binary_button_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/BinaryFieldNo"
             android:layout_weight="1"
             tools:text="A"/>
 
@@ -32,6 +33,7 @@
             android:id="@+id/binary_button_b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/BinaryFieldYes"
             android:layout_weight="1"
             tools:text="B"/>
 

@@ -184,21 +184,13 @@ public class FormApi {
     }
 
     if(field.hasSubfields()){
-      //add sub-field holder:
       LinearLayout subfieldHolder = new LinearLayout(context);
-      subfieldHolder.setBackgroundColor(Color.CYAN);
       subfieldHolder.setOrientation(LinearLayout.VERTICAL);
       subfieldHolder.setTag(String.format("%s_holder", field.id));
 
       LinearLayout.LayoutParams subfieldHolderLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
       subfieldHolder.setLayoutParams(subfieldHolderLayoutParams);
       root.addView(subfieldHolder);
-
-      /*
-      for(Field subfield : field.subfields){
-        addField(context, subfield, root, true);
-      }
-      */
     }
   }
 

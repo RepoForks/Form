@@ -58,9 +58,13 @@ public class FieldBinary extends LinearLayout implements CompoundButton.OnChecke
     if(field.choices != null && field.choices.size() > 0){
       buttonA.setTag(field.choices.get(0).id);
       buttonA.setText(field.choices.get(0).text);
+      buttonA.setTextOff(field.choices.get(0).text);
+      buttonA.setTextOn(field.choices.get(0).text);
 
       buttonB.setTag(field.choices.get(1).id);
       buttonB.setText(field.choices.get(1).text);
+      buttonB.setTextOff(field.choices.get(1).text);
+      buttonB.setTextOn(field.choices.get(1).text);
 
       buttonA.setOnCheckedChangeListener(this);
       buttonB.setOnCheckedChangeListener(this);
@@ -72,9 +76,27 @@ public class FieldBinary extends LinearLayout implements CompoundButton.OnChecke
   }
 
   @Override
-  public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+  public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+    Log.d(TAG, "onCheckedChanged: " + compoundButton + " isChecked: " + isChecked);
+    if(compoundButton == buttonA){
+      buttonB.setChecked(!isChecked);
+    }
+    if(compoundButton == buttonB ){
+      buttonA.setChecked(!isChecked);
+    }
     if(fieldListener != null){
-      String choiceTag = (String)compoundButton.getTag();
+
+      String choiceTag;
+      if(isChecked){
+        choiceTag = (String)compoundButton.getTag();
+      }else{
+        if(compoundButton == buttonA){
+          choiceTag = (String)buttonB.getTag();
+        }else{
+          choiceTag = (String)buttonA.getTag();
+        }
+      }
+
       Choice selectedChoice = null;
       for(Choice choice : field.choices){
         if(choice.id == choiceTag){
