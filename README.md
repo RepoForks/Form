@@ -169,7 +169,7 @@ Config options: `singleline` and either: `numeric`, `email`, or `phonenumber`:
 {
   "id": "TXT01",
   "text": "Sous collector name:",
-  "type": "FREE_TEXT"
+  "type": "FREE_TEXT",
   "config": "singleline|numeric"
 }
 ```
