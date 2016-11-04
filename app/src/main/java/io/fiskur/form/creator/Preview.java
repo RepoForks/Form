@@ -10,13 +10,26 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import io.fiskur.form.Field;
 import io.fiskur.form.Form;
+import io.fiskur.form.Group;
 
 public class Preview {
   private static final String PREFS = "io.fiskur.form.creator.PREFS";
   private static final String PREFS_FORM = "io.fiskur.form.creator.PREFS_FORM";
+  public static final String PREVIEW_GROUP_ID = "io.fiskur.form.creator.PREVIEW_GROUP_ID";
   public static Form form = null;
+
+  public static void initForm(){
+    form = new Form();
+    form.startGroupId = PREVIEW_GROUP_ID;
+    form.groups = new ArrayList<Group>();
+    Group previewGroup = new Group();
+    previewGroup.id = PREVIEW_GROUP_ID;
+    previewGroup.fields = new ArrayList<Field>();
+  }
 
   public static void saveForm(Context context){
     context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString(PREFS_FORM, objectToString(form)).apply();

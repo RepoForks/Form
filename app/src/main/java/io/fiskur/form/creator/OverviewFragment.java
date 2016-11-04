@@ -39,7 +39,7 @@ public class OverviewFragment extends Fragment implements OnStartDragListener {
     RecyclerView recyclerView = (RecyclerView) view;
     recyclerView.setLayoutManager(new LinearLayoutManager(context));
     adapter = new OverviewRecyclerViewAdapter(mListener, this);
-    adapter.setItems(Preview.form.fields);
+    adapter.setItems(Preview.form.getGroupFields(Preview.PREVIEW_GROUP_ID));
     recyclerView.setAdapter(adapter);
 
     ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
@@ -79,7 +79,7 @@ public class OverviewFragment extends Fragment implements OnStartDragListener {
   public void update(){
     Log.d(TAG, "update()");
     if(adapter != null) {
-      adapter.setItems(Preview.form.fields);
+      adapter.setItems(Preview.form.getGroupFields(Preview.PREVIEW_GROUP_ID));
     }
   }
 }

@@ -10,5 +10,39 @@ public class Form implements Serializable {
   public String time;
   public String author;
   public String contact;
-  public List<Field> fields = null;
+  public String startGroupId;
+  public List<Group> groups;
+
+  public List<Field> getGroupFields(String groupId){
+    for(Group group : groups){
+      if(group.id.equals(groupId)){
+        return group.fields;
+      }
+    }
+    return null;
+  }
+
+  public Group getGroup(String groupId){
+    for(Group group : groups){
+      if(group.id.equals(groupId)){
+        return group;
+      }
+    }
+    return null;
+  }
+
+  public Field findField(String fieldId){
+    for(Group group : groups){
+      for(Field field : group.fields){
+        if(field.id.equals(fieldId)){
+          return field;
+        }
+      }
+    }
+    return null;
+  }
+
+  public void addField(String groupId, Field field){
+    getGroupFields(groupId).add(field);
+  }
 }

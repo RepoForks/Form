@@ -1,5 +1,7 @@
 package io.fiskur.form;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -23,43 +25,32 @@ public class FormUIGraph implements FieldListener {
 
   //Single choice/RadioButton Group toggled:
   @Override
-  public void choiceSelected(String fieldId, String choiceId) {
+  public void choiceSelected(Context context, String fieldId, String choiceId, String subgroupId) {
     Field field = findField(fieldId);
     if(field == null){
       return;
     }
 
-    toggleVisibilities(field, choiceId, true);
+    //toggleVisibilities(field, choiceId, true);
+    buildSubgroup(context, fieldId, subgroupId);
   }
 
-  //Checkboxes:
-  @Override
-  public void choiceDeselected(String fieldId, String choiceId) {
-    //not needed - as we have a mandatory single choice subfields visibility will be handled when alternative is selected
-  }
-
-  @Override
-  public void checkSelected(String fieldId, String choiceId) {
-    Field field = findField(fieldId);
-    if(field == null){
+  private void buildSubgroup(Context context, String fieldId, String subgroupId){
+    String holderTag = String.format("%s_holder", fieldId);
+    LinearLayout holder = (LinearLayout) root.findViewWithTag(holderTag);
+    if(holder == null){
+      Log.e(TAG, "Could not find subgroup holder");
       return;
     }
+    holder.removeAllViews();
 
-    toggleVisibilities(field, choiceId, true);
+    Group group = form.getGroup(subgroupId);
+    FormApi.getInstance().buildGroup(context, group, holder);
+
   }
 
-  @Override
-  public void checkDeselected(String fieldId, String choiceId) {
-    Field field = findField(fieldId);
-    if(field == null){
-      return;
-    }
-
-    toggleVisibilities(field, choiceId, false);
-  }
-
-  //todo - could be nested choices (which isn't supported here yet), this is nested fields:
   private void toggleVisibilities(Field field, String choiceId, boolean choiceSelected){
+    /*
     if(field.hasSubfields()) {
       int fieldCount = root.getChildCount();
       for (Field subfield : field.subfields) {
@@ -82,15 +73,10 @@ public class FormUIGraph implements FieldListener {
         }
       }
     }
+    */
   }
 
   private Field findField(String fieldId){
-    Field theField = null;
-    for(Field field : form.fields){
-      if(field.id.equals(fieldId)){
-        theField = field;
-      }
-    }
-    return theField;
+    return form.findField(fieldId);
   }
 }

@@ -2,21 +2,26 @@ package io.fiskur.form.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
+import io.fiskur.form.Choice;
 import io.fiskur.form.Field;
 import io.fiskur.form.FieldListener;
 import io.fiskur.form.R;
 
 //To support Yes/No fields with buttons instead of a radio group
-public class FieldBinary extends LinearLayout implements View.OnClickListener {
+public class FieldBinary extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
+  private static final String TAG = "FieldBinary";
 
+  private Field field;
   private TextView label;
-  private Button buttonA;
-  private Button buttonB;
+  private ToggleButton buttonA;
+  private ToggleButton buttonB;
 
   private FieldListener fieldListener = null;
 
@@ -38,11 +43,12 @@ public class FieldBinary extends LinearLayout implements View.OnClickListener {
   public void init(){
     inflate(getContext(), R.layout.field_binary, this);
     label = (TextView) findViewById(R.id.label);
-    buttonA = (Button)findViewById(R.id.binary_button_a);
-    buttonB = (Button)findViewById(R.id.binary_button_b);
+    buttonA = (ToggleButton)findViewById(R.id.binary_button_a);
+    buttonB = (ToggleButton)findViewById(R.id.binary_button_b);
   }
 
-  public void setField(Context context, Field field){
+  public void setField(Field field){
+    this.field = field;
     if(field.text != null && !field.text.isEmpty()){
       label.setVisibility(View.VISIBLE);
       label.setText(field.text);
@@ -56,8 +62,8 @@ public class FieldBinary extends LinearLayout implements View.OnClickListener {
       buttonB.setTag(field.choices.get(1).id);
       buttonB.setText(field.choices.get(1).text);
 
-      buttonA.setOnClickListener(this);
-      buttonB.setOnClickListener(this);
+      buttonA.setOnCheckedChangeListener(this);
+      buttonB.setOnCheckedChangeListener(this);
     }
   }
 
@@ -66,9 +72,21 @@ public class FieldBinary extends LinearLayout implements View.OnClickListener {
   }
 
   @Override
-  public void onClick(View view) {
+  public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
     if(fieldListener != null){
-        fieldListener.choiceSelected((String)FieldBinary.this.getTag(), (String)buttonA.getTag());
-    }
+      String choiceTag = (String)compoundButton.getTag();
+      Choice selectedChoice = null;
+      for(Choice choice : field.choices){
+        if(choice.id == choiceTag){
+          selectedChoice = choice;
+          break;
+        }
+      }
+      if(selectedChoice != null){
+        fieldListener.choiceSelected(getContext(), (String)FieldBinary.this.getTag(), choiceTag, selectedChoice.subgroupId);
+      }else{
+        Log.e(TAG, "Could not find subgroupID");
+      }
+     }
   }
 }

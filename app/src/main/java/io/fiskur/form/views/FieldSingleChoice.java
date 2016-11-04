@@ -15,6 +15,7 @@ import io.fiskur.form.R;
 
 public class FieldSingleChoice extends LinearLayout{
 
+  private Field field;
   private TextView singleChoiceBody;
   private RadioGroup radioGroup;
 
@@ -45,7 +46,8 @@ public class FieldSingleChoice extends LinearLayout{
     this.fieldListener = fieldListener;
   }
 
-  public void setField(Context context, Field field){
+  public void setField(Context context, Field _field){
+    this.field = _field;
     if(field.text != null && !field.text.isEmpty()){
       singleChoiceBody.setVisibility(View.VISIBLE);
       singleChoiceBody.setText(field.text);
@@ -66,9 +68,11 @@ public class FieldSingleChoice extends LinearLayout{
         RadioButton radio = (RadioButton)group.findViewById(checkedId);
          if(fieldListener != null){
           if(radio.isChecked()){
-            fieldListener.choiceSelected((String)FieldSingleChoice.this.getTag(), (String)radio.getTag());
+            String radioTag = (String)radio.getTag();
+            String subgroupId = field.getSubgroupId(radioTag);
+            fieldListener.choiceSelected(getContext(), (String)FieldSingleChoice.this.getTag(), radioTag, subgroupId);
           }else{
-            fieldListener.choiceDeselected((String)FieldSingleChoice.this.getTag(), (String)radio.getTag());
+            //todo?
           }
         }
       }

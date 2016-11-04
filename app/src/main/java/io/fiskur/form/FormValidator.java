@@ -17,25 +17,27 @@ public class FormValidator {
   public ValidationResponse validateForm(Form form){
     ValidationResponse validation = new ValidationResponse();
     if(form != null){
-      if(form.fields != null && form.fields.size() > 0){
-        for(Field field : form.fields){
-          getIds(field);
-        }
-        Set<String> dupes = findDuplicates(ids);
-        if(dupes.size() > 0){
-          validation.status = ValidationResponse.FORM_DUPLICATE_ID;
-          String[] duplicates = new String[dupes.size()];
-          int index = 0;
-          for(String dupe : dupes){
-            duplicates[index] = dupe;
-            index++;
+      for(Group group : form.groups) {
+        if (group.fields != null && group.fields.size() > 0) {
+          for (Field field : group.fields) {
+            getIds(field);
           }
-          validation.duplicates = duplicates;
-        }else{
-          validation.status = ValidationResponse.FORM_OK;
+          Set<String> dupes = findDuplicates(ids);
+          if (dupes.size() > 0) {
+            validation.status = ValidationResponse.FORM_DUPLICATE_ID;
+            String[] duplicates = new String[dupes.size()];
+            int index = 0;
+            for (String dupe : dupes) {
+              duplicates[index] = dupe;
+              index++;
+            }
+            validation.duplicates = duplicates;
+          } else {
+            validation.status = ValidationResponse.FORM_OK;
+          }
+        } else {
+          validation.status = ValidationResponse.FORM_NO_FIELDS;
         }
-      }else{
-        validation.status = ValidationResponse.FORM_NO_FIELDS;
       }
     }else{
       validation.status = ValidationResponse.FORM_NULL;
@@ -46,11 +48,6 @@ public class FormValidator {
 
   private void getIds(Field field){
     ids.add(field.id);
-    if(field.hasSubfields()){
-      for(Field subfield : field.subfields){
-        getIds(subfield);
-      }
-    }
   }
 
   private <T> Set<T> findDuplicates(Collection<T> list) {

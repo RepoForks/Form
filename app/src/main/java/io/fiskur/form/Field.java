@@ -27,14 +27,25 @@ public class Field implements Serializable{
   public String parent = null;
   public List<Choice> choices;
   public boolean required;
-  public List<Field> subfields;
 
   public boolean hasSubfields(){
+    if(choices != null){
+      for(Choice choice : choices){
+        if(choice.subgroupId != null){
+          return true;
+        }
+      }
+      return false;
+    }else{
+      return false;
+    }
+    /*
     if(subfields != null && subfields.size() > 0){
       return true;
     }else{
       return false;
     }
+    */
   }
 
   public String getPreviewLabel(){
@@ -84,6 +95,15 @@ public class Field implements Serializable{
     }
 
     return  sb.toString();
+  }
+
+  public String getSubgroupId(String choiceId){
+    for(Choice choice: choices){
+      if(choice.id.equals(choiceId)){
+        return choice.subgroupId;
+      }
+    }
+    return null;
   }
 
   @Override

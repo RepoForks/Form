@@ -19,14 +19,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <!--             android:theme="@style/ToggleSwitchTheme"
+ -->
+        <ToggleButton
             android:id="@+id/binary_button_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:text="A"/>
 
-        <Button
+        <ToggleButton
             android:id="@+id/binary_button_b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

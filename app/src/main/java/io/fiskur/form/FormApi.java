@@ -1,6 +1,7 @@
 package io.fiskur.form;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -41,7 +42,6 @@ public class FormApi {
   }
 
   public void buildViews(Context context, Form form, LinearLayout root){
-
     if(root == null){
       Log.e(TAG, "Root LinearLayout is null");
       return;
@@ -52,8 +52,26 @@ public class FormApi {
     formUIGraph.setForm(form);
     formUIGraph.setRootLayout(root);
 
-    for(Field field : form.fields){
+    String startGroupId = form.startGroupId;
+
+
+    for(Field field : form.getGroupFields(startGroupId)){
       addField(context, field, root, false);
+    }
+  }
+
+
+  public void buildGroup(Context context, Group group, LinearLayout holder){
+
+    if(holder == null){
+      Log.e(TAG, "Root LinearLayout is null");
+      return;
+    }
+
+    holder.setOrientation(LinearLayout.VERTICAL);
+
+    for(Field field : group.fields){
+      addField(context, field, holder, false);
     }
   }
 
@@ -130,7 +148,7 @@ public class FormApi {
       case Field.TYPE_BINARY_CHOICE:
         FieldBinary binary = new FieldBinary(context);
         binary.setTag(field.id);
-        binary.setField(context, field);
+        binary.setField(field);
         if(field.hasSubfields()) {
           binary.setFieldListener(formUIGraph);
         }
@@ -164,11 +182,23 @@ public class FormApi {
         root.addView(multiChoice);
         break;
     }
-    //recursively add subfields
+
     if(field.hasSubfields()){
+      //add sub-field holder:
+      LinearLayout subfieldHolder = new LinearLayout(context);
+      subfieldHolder.setBackgroundColor(Color.CYAN);
+      subfieldHolder.setOrientation(LinearLayout.VERTICAL);
+      subfieldHolder.setTag(String.format("%s_holder", field.id));
+
+      LinearLayout.LayoutParams subfieldHolderLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+      subfieldHolder.setLayoutParams(subfieldHolderLayoutParams);
+      root.addView(subfieldHolder);
+
+      /*
       for(Field subfield : field.subfields){
         addField(context, subfield, root, true);
       }
+      */
     }
   }
 

@@ -62,8 +62,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
     if(Preview.form == null){
       Preview.loadForm(this);
       if(Preview.form == null) {
-        Preview.form = new Form();
-        Preview.form.fields = new ArrayList<Field>();
+        Preview.initForm();
       }
     }
 
@@ -173,7 +172,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               currentDateField.id = getNewId();
               currentDateField.text = input.toString();
               currentDateField.type = Field.TYPE_CURRENT_DATE;
-              Preview.form.fields.add(currentDateField);
+              Preview.form.addField(Preview.PREVIEW_GROUP_ID, currentDateField);
               updateTabs();
             }
           })
@@ -191,7 +190,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               dateField.id = getNewId();
               dateField.text = input.toString();
               dateField.type = Field.TYPE_DATE;
-              Preview.form.fields.add(dateField);
+              Preview.form.addField(Preview.PREVIEW_GROUP_ID, dateField);
               updateTabs();
             }
           })
@@ -202,7 +201,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
       Field divField = new Field();
       divField.id = getNewId();
       divField.type = Field.TYPE_DIVIDER;
-      Preview.form.fields.add(divField);
+      Preview.form.addField(Preview.PREVIEW_GROUP_ID, divField);
       updateTabs();
     }else if(view == addStaticTextButton){
       new MaterialDialog.Builder(this)
@@ -233,7 +232,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               staticTextField.text = contentEdit.getText().toString();
             }
 
-            Preview.form.fields.add(staticTextField);
+            Preview.form.addField(Preview.PREVIEW_GROUP_ID, staticTextField);
             updateTabs();
           }
         })
@@ -254,7 +253,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
 
             //todo
 
-            Preview.form.fields.add(multiChoiceField);
+            Preview.form.addField(Preview.PREVIEW_GROUP_ID, multiChoiceField);
             updateTabs();
           }
         })
@@ -272,7 +271,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               imageField.id = getNewId();
               imageField.text = input.toString();
               imageField.type = Field.TYPE_STATIC_IMAGE;
-              Preview.form.fields.add(imageField);
+              Preview.form.addField(Preview.PREVIEW_GROUP_ID, imageField);
               updateTabs();
             }
           })
@@ -292,7 +291,7 @@ public class CreatorActivity extends AppCompatActivity implements View.OnClickLi
               timeField.id = getNewId();
               timeField.text = input.toString();
               timeField.type = Field.TYPE_TIME;
-              Preview.form.fields.add(timeField);
+              Preview.form.addField(Preview.PREVIEW_GROUP_ID, timeField);
               updateTabs();
             }
           })

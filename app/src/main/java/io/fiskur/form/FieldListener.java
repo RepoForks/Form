@@ -1,8 +1,7 @@
 package io.fiskur.form;
 
+import android.content.Context;
+
 public interface FieldListener {
-  void choiceSelected(String fieldId, String choiceId);
-  void choiceDeselected(String fieldId, String choiceId);
-  void checkSelected(String fieldId, String choiceId);
-  void checkDeselected(String fieldId, String choiceId);
+  void choiceSelected(Context context, String fieldId, String choiceId, String subgroupId);
 }
