@@ -198,6 +198,16 @@ Invisible field to provide vertical spacing where needed.
 }
 ```
 
+### Image
+
+```json
+{
+  "id": "image1",
+  "type": "IMAGE",
+  "url": "http://fiskur.eu/apps/blueventures/oct_mantle.png"
+}
+```
+
 ### Current Date
 
 A non-interactive field that displays, and returns, the current date.
