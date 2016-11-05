@@ -1,7 +1,6 @@
 package io.fiskur.form;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,13 +13,15 @@ import io.fiskur.form.views.FieldCurrentDate;
 import io.fiskur.form.views.FieldDate;
 import io.fiskur.form.views.FieldDivider;
 import io.fiskur.form.views.FieldFreeText;
+import io.fiskur.form.views.FieldImage;
 import io.fiskur.form.views.FieldMutipleChoice;
 import io.fiskur.form.views.FieldSingleChoice;
 import io.fiskur.form.views.FieldSpacer;
 import io.fiskur.form.views.FieldStaticText;
+import io.fiskur.form.views.FieldSubmit;
 import io.fiskur.form.views.FieldTime;
 
-public class FormApi {
+public class FormApi implements SubmitListener {
 
   private static final String TAG = "FormApi";
 
@@ -36,9 +37,15 @@ public class FormApi {
     return instance;
   }
 
+  private ImageLoader imageLoader = null;
+
   public Form createForm(String jsonForm){
     Gson gson = new GsonBuilder().create();
     return gson.fromJson(jsonForm, Form.class);
+  }
+
+  public void setImageLoader(ImageLoader imageLoader){
+    this.imageLoader = imageLoader;
   }
 
   public void buildViews(Context context, Form form, LinearLayout root){
@@ -46,6 +53,9 @@ public class FormApi {
       Log.e(TAG, "Root LinearLayout is null");
       return;
     }
+
+    //init prefs class
+    FieldPrefs.getInstance().init(context.getSharedPreferences(FieldPrefs.PREFS_KEY, Context.MODE_PRIVATE));
 
     root.setOrientation(LinearLayout.VERTICAL);
 
@@ -68,12 +78,19 @@ public class FormApi {
       return;
     }
 
+    if(group == null){
+      Log.e(TAG, "Group is null - a choice subgroup may not be populated");
+      return;
+    }
+
     holder.setOrientation(LinearLayout.VERTICAL);
 
     for(Field field : group.fields){
-      addField(context, field, holder, false);
+      addField(context, field, holder, true);
     }
   }
+
+  private static final long FADE_TIME = 750;
 
   private void addField(Context context, Field field, LinearLayout root, boolean isSubfield){
     l("Adding field of type: " + field.type);
@@ -81,10 +98,11 @@ public class FormApi {
       case Field.TYPE_DIVIDER:
         FieldDivider div = new FieldDivider(context);
         div.setTag(field.id);
-        if(isSubfield){
-          div.setVisibility(View.GONE);
-        }
         root.addView(div);
+        if(isSubfield){
+          div.setAlpha(0);
+          ViewTools.show(div, FADE_TIME);
+        }
         break;
       case Field.TYPE_SPACER:
         int height = 20;
@@ -95,55 +113,61 @@ public class FormApi {
         }
         FieldSpacer spacer = new FieldSpacer(context, height);
         spacer.setTag(field.id);
-        if(isSubfield){
-          spacer.setVisibility(View.GONE);
-        }
         root.addView(spacer);
+        if(isSubfield){
+          spacer.setAlpha(0);
+          ViewTools.show(spacer, FADE_TIME);
+        }
         break;
       case Field.TYPE_STATIC_TEXT:
         FieldStaticText staticText = new FieldStaticText(context);
         staticText.setTag(field.id);
         staticText.setField(field);
-        if(isSubfield){
-          staticText.setVisibility(View.GONE);
-        }
         root.addView(staticText);
+        if(isSubfield){
+          staticText.setAlpha(0);
+          ViewTools.show(staticText, FADE_TIME);
+        }
         break;
       case Field.TYPE_FREE_TEXT:
         FieldFreeText freeText = new FieldFreeText(context);
         freeText.setTag(field.id);
         freeText.setField(field);
-        if(isSubfield){
-          freeText.setVisibility(View.GONE);
-        }
         root.addView(freeText);
+        if(isSubfield){
+          freeText.setAlpha(0);
+          ViewTools.show(freeText, FADE_TIME);
+        }
         break;
       case Field.TYPE_CURRENT_DATE:
         FieldCurrentDate currentDate = new FieldCurrentDate(context);
         currentDate.setTag(field.id);
         currentDate.setField(field);
-        if(isSubfield){
-          currentDate.setVisibility(View.GONE);
-        }
         root.addView(currentDate);
+        if(isSubfield){
+          currentDate.setAlpha(0);
+          ViewTools.show(currentDate, FADE_TIME);
+        }
         break;
       case Field.TYPE_DATE:
         FieldDate date = new FieldDate(context);
         date.setTag(field.id);
         date.setField(field);
-        if(isSubfield){
-          date.setVisibility(View.GONE);
-        }
         root.addView(date);
+        if(isSubfield){
+          date.setAlpha(0);
+          ViewTools.show(date, FADE_TIME);
+        }
         break;
       case Field.TYPE_TIME:
         FieldTime time = new FieldTime(context);
         time.setTag(field.id);
         time.setField(field);
-        if(isSubfield){
-          time.setVisibility(View.GONE);
-        }
         root.addView(time);
+        if(isSubfield){
+          time.setAlpha(0);
+          ViewTools.show(time, FADE_TIME);
+        }
         break;
       case Field.TYPE_BINARY_CHOICE:
         FieldBinary binary = new FieldBinary(context);
@@ -152,10 +176,11 @@ public class FormApi {
         if(field.hasSubfields()) {
           binary.setFieldListener(formUIGraph);
         }
-        if(isSubfield){
-          binary.setVisibility(View.GONE);
-        }
         root.addView(binary);
+        if(isSubfield){
+          binary.setAlpha(0);
+          ViewTools.show(binary, FADE_TIME);
+        }
         break;
       case Field.TYPE_SINGLE_CHOICE:
         FieldSingleChoice singleChoice = new FieldSingleChoice(context);
@@ -164,10 +189,11 @@ public class FormApi {
         if(field.hasSubfields()) {
           singleChoice.setFieldListener(formUIGraph);
         }
-        if(isSubfield){
-          singleChoice.setVisibility(View.GONE);
-        }
         root.addView(singleChoice);
+        if(isSubfield){
+          singleChoice.setAlpha(0);
+          ViewTools.show(singleChoice, FADE_TIME);
+        }
         break;
       case Field.TYPE_MULTI_CHOICE:
         FieldMutipleChoice multiChoice = new FieldMutipleChoice(context);
@@ -176,10 +202,28 @@ public class FormApi {
         if(field.hasSubfields()) {
           multiChoice.setFieldListener(formUIGraph);
         }
-        if(isSubfield){
-          multiChoice.setVisibility(View.GONE);
-        }
         root.addView(multiChoice);
+        if(isSubfield){
+          multiChoice.setAlpha(0);
+          ViewTools.show(multiChoice, FADE_TIME);
+        }
+        break;
+      case Field.TYPE_IMAGE:
+        FieldImage imageField = new FieldImage(context);
+        imageField.setTag(field.id);
+        imageField.setImageLoader(imageLoader);
+        imageField.setField(field);
+        root.addView(imageField);
+        if(isSubfield){
+          imageField.setAlpha(0);
+          ViewTools.show(imageField, FADE_TIME);
+        }
+        break;
+      case Field.TYPE_SUBMIT:
+        FieldSubmit submitField = new FieldSubmit(context);
+        submitField.setTag(field.id);
+        submitField.setSubmitListener(this);
+        root.addView(submitField);
         break;
     }
 
@@ -211,5 +255,10 @@ public class FormApi {
 
   private void l(String message){
     Log.d(TAG, message);
+  }
+
+  @Override
+  public void submitForm() {
+
   }
 }

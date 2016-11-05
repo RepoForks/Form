@@ -17,12 +17,14 @@ public class Field implements Serializable{
   public static final String TYPE_MULTI_CHOICE = "MULTI_CHOICE";
   public static final String TYPE_BINARY_CHOICE = "BINARY_CHOICE";
   public static final String TYPE_FREE_TEXT = "FREE_TEXT";
+  public static final String TYPE_IMAGE = "IMAGE";
   public static final String TYPE_SUBMIT = "SUBMIT";
 
   public String id;
   public String title;
   public String subtitle;
   public String config;
+  public String url;
   public String text;
   public String type;
   public String parent = null;

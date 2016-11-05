@@ -26,6 +26,8 @@ public class FieldMutipleChoice extends LinearLayout implements CompoundButton.O
 
   private FieldListener fieldListener = null;
 
+  private Field field;
+
   public FieldMutipleChoice(Context context) {
     super(context);
     init();
@@ -53,6 +55,7 @@ public class FieldMutipleChoice extends LinearLayout implements CompoundButton.O
   }
 
   public void setField(Context context, Field field){
+    this.field = field;
     if(field.text != null && !field.text.isEmpty()){
       multiChoiceBody.setVisibility(View.VISIBLE);
       multiChoiceBody.setText(field.text);
@@ -72,20 +75,11 @@ public class FieldMutipleChoice extends LinearLayout implements CompoundButton.O
 
   @Override
   public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-    CheckBox check = (CheckBox) compoundButton;
-    String choiceId = (String) check.getTag();
-    if(checked){
-      if(!selectedChoices.contains(choiceId)){
-        selectedChoices.add(choiceId);
-      }
-    }else{
-      if(selectedChoices.contains(choiceId)){
-        selectedChoices.remove(choiceId);
-      }
+    if(fieldListener != null){
+      CheckBox check = (CheckBox) compoundButton;
+      String choiceId = (String) check.getTag();
+      String subgroupId = field.getSubgroupId(choiceId);
+      fieldListener.choiceSelected(getContext(), field.id, choiceId, subgroupId);
     }
-  }
-
-  public String[] getFieldSelectedChoices(){
-    return selectedChoices.toArray(new String[selectedChoices.size()]);
   }
 }
