@@ -163,14 +163,14 @@ Free text input from the user.
 }
 ```
 
-Config options: `singleline` and either: `numeric`, `email`, or `phonenumber`:
+Config options: `singleline`, `persist`, and either: `numeric`, `email`, or `phonenumber`:
 
 ```json
 {
   "id": "TXT01",
   "text": "Sous collector name:",
   "type": "FREE_TEXT",
-  "config": "singleline|numeric"
+  "config": "singleline|persist"
 }
 ```
 
