@@ -151,6 +151,20 @@ Simple example with a single top-level field showing two alternative paths a for
 
 ## Available Fields
 
+### Static Text
+
+Use for titles, notes, explanations - any extra instruction for the end user, there's 3 fields you can use, all optional:
+
+```json
+{
+  "id": "demo_intro",
+  "title": "Form",
+  "subtitle": "A simple replacement for ODK Collect",
+  "text": "Hello world!",
+  "type": "STATIC_TEXT"
+}
+```
+
 ### Text Input
 
 Free text input from the user. 
