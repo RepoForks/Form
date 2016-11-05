@@ -31,23 +31,23 @@ Simple Form object containing an array of fields:
   "time": "10:49",
   "author": "Jonathan Fisher",
   "contact": "jonathan@fiskur.eu",
-  "fields": [
+  "startGroupId": "STARTGROUP",
+  "groups": [
     {
-      "...":, "..."
+      "id": "STARTGROUP",
+      "fields": [
+        {
+          "id": "Q1",
+          "title": "Todays Date",
+          "type": "CURRENT_DATE"
+        }
+      ]
     }
   ]
 }
 ```
 
 A Field is a query, question, radio buttons, checkboxes, or a non interactive section (text, or todays date):
-
-```json
-{
-  "id": "Q1",
-  "title": "Todays Date",
-  "type": "CURRENT_DATE"
-}
-```
 
 ```json
 {
@@ -151,6 +151,30 @@ Simple example with a single top-level field showing two alternative paths a for
 
 ## Available Fields
 
+### Text Input
+
+Free text input from the user. 
+
+```json
+{
+  "id": "TXT01",
+  "text": "Sous collector name:",
+  "type": "FREE_TEXT"
+}
+```
+
+Config options: `singleline`, `persist`, and either: `numeric`, `email`, or `phonenumber`:
+
+```json
+{
+  "id": "TXT01",
+  "text": "Sous collector name:",
+  "type": "FREE_TEXT",
+  "config": "singleline|persist"
+}
+```
+
+
 ### Divider
 
 A simple non-interactive horizontal divider to seperate two other fields.
@@ -203,6 +227,29 @@ A non-interactive field that displays, and returns, the current date.
   "id": "WAKE1",
   "type": "TIME",
   "text": "What time did you wake up?"
+}
+```
+
+### Binary Yes/No Buttons
+
+A field that allows a binary decision but displays a more prominent ui than two radio buttons.
+
+```json
+{
+  "id": "WORK_NORM",
+  "type": "BINARY_CHOICE",
+  "text": "Did you work as normal today?",
+  "choices":
+  [
+    {
+      "id": "WORK_NORM_NO",
+      "text": "No"
+    },
+    {
+      "id": "WORK_NORM_YES",
+      "text": "Yes"
+    }
+  ]
 }
 ```
 
