@@ -317,7 +317,7 @@ A field that allows a binary decision but displays a more prominent ui than two 
 
 ```json
 {
-  "id": "MUSIC1",
+  "id": "music_genre",
   "type": "MULTI_CHOICE",
   "text": "Which music genres do you enjoy?",
   "choices": [
@@ -358,6 +358,19 @@ A field that allows a binary decision but displays a more prominent ui than two 
       "text": "Romantic"
     }
   ]
+}
+```
+
+### Popup Subgroup for multiple entries - work in progress
+
+A button field that will show a subgroup in a popup dialog, then display the completed subgroups in a list. 
+
+```json
+{
+  "id": "add_octopus_multi",
+  "type": "popup_subgroup",
+  "text": "Add octopus catch details",
+  "subgroupId": "add_octopus_subgroup"
 }
 ```
 
