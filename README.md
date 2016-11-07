@@ -25,16 +25,16 @@ Simple Form object containing an array of fields:
 
 ```json
 {
-  "id": "QWERT098765",
+  "id": "qwerty0123456",
   "title": "Octopus Monitoring",
   "date": "05092016",
   "time": "10:49",
   "author": "Jonathan Fisher",
   "contact": "jonathan@fiskur.eu",
-  "startGroupId": "STARTGROUP",
+  "startGroupId": "start_group",
   "groups": [
     {
-      "id": "STARTGROUP",
+      "id": "start_group",
       "fields": [
         {
           "id": "Q1",
@@ -104,42 +104,46 @@ Simple example with a single top-level field showing two alternative paths a for
   "time": "11:32",
   "author": "Jonathan Fisher",
   "contact": "jonathan@fiskur.eu",
-  "fields": [
+  "startGroupId": "start_group",
+  "groups": [
     {
-      "id": "DEMO001_FISHTODAY",
-      "type": "BINARY_CHOICE",
-      "text": "Did anyone go fishing for octopus today?",
-      "choices":
-      [
-        {
-          "id": "DEMO001_FISHTODAY_NO",
-          "text": "No",
-          "subgroupId": "DEMO001_FISHTODAY_NO_SG"
-        },
-        {
-          "id": "DEMO001_FISHTODAY_YES",
-          "text": "Yes",
-          "subgroupId": "DEMO001_FISHTODAY_YES_SG"
-        }
-      ]
-    }
-  ],
-  "subgroups": [
-    {
-      "id": "DEMO001_FISHTODAY_NO_SG",
+      "id": "start_group",
       "fields": [
         {
-          "id": "S1",
+          "id": "fish_today",
+          "type": "BINARY_CHOICE",
+          "text": "Did anyone go fishing for octopus today?",
+          "choices":
+          [
+            {
+              "id": "fish_today_no",
+              "text": "No",
+              "subgroupId": "fish_today_no_subgroup"
+            },
+            {
+              "id": "fish_today_yes",
+              "text": "Yes",
+              "subgroupId": "fish_today_yes_subgroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fish_today_no_subgroup",
+      "fields": [
+        {
+          "id": "fish_today_no_label",
           "type": "STATIC_TEXT",
           "title": "Fishing Today: No"
         }
       ]
     },
     {
-      "id": "DEMO001_FISHTODAY_YES_SG",
+      "id": "fish_today_yes_subgroup",
       "fields": [
         {
-          "id": "S2",
+          "id": "fish_today_yes_label",
           "type": "STATIC_TEXT",
           "title": "Fishing Today: Yes"
         }
