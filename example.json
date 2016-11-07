@@ -1,0 +1,323 @@
+{
+  "id": "DEMO001",
+  "title": "Octopus Monitoring",
+  "date": "02112016",
+  "time": "11:32",
+  "author": "Jonathan Fisher",
+  "contact": "jonathan@fiskur.eu",
+  "startGroupId": "start_group",
+  "groups": [
+    {
+      "id": "start_group",
+      "fields": [
+        {
+          "id": "demo_intro",
+          "title": "Form Demo",
+          "text": "This is a work in progress demo of a new 'Form' library being developed for Blue Ventures Octopus Monitoring.",
+          "type": "STATIC_TEXT"
+        },
+        {
+          "id": "demo_intro_div",
+          "type": "DIVIDER"
+        },
+        {
+          "id": "current_date",
+          "text": "Todays Date",
+          "type": "CURRENT_DATE"
+        },
+        {
+          "id": "village_name",
+          "text": "Name of village:",
+          "type": "FREE_TEXT",
+          "config": "singleline|persist"
+        },
+        {
+          "id": "collector_name",
+          "text": "Data collector name:",
+          "type": "FREE_TEXT",
+          "config": "singleline|persist"
+        },
+        {
+          "id": "anyone_fish_today",
+          "type": "BINARY_CHOICE",
+          "text": "Did anyone go fishing for octopus today?",
+          "choices":
+          [
+            {
+              "id": "anyone_fish_today_no",
+              "text": "No",
+              "subgroupId": "anyone_fish_today_no_subgroup"
+            },
+            {
+              "id": "anyone_fish_today_yes",
+              "text": "Yes",
+              "subgroupId": "anyone_fish_today_yes_subgroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anyone_fish_today_no_subgroup",
+      "fields": [
+        {
+          "id": "DEMO001_FISHTODAY_NO_REASON",
+          "type": "SINGLE_CHOICE",
+          "text": "Why did no-one go fishing today?",
+          "choices": [
+            {
+              "id": "FISHTODAY_NO_REASON_A",
+              "text": "Bad weather"
+            },
+            {
+              "id": "FISHTODAY_NO_REASON_B",
+              "text": "Public holiday"
+            },
+            {
+              "id": "FISHTODAY_NO_REASON_C",
+              "text": "Tide too high"
+            },
+            {
+              "id": "FISHTODAY_NO_REASON_D",
+              "text": "Death in the village"
+            },
+            {
+              "id": "FISHTODAY_NO_REASON_E",
+              "text": "Other",
+              "subgroupId": "FISHTODAY_NO_OTHER_REASON_SG"
+            }
+          ]
+        },
+        {
+          "id": "SUBMIT_A",
+          "type": "SUBMIT"
+        }
+      ]
+    },
+    {
+      "id": "anyone_fish_today_yes_subgroup",
+      "fields": [
+        {
+          "id": "DEMO001_FISHTODAY_NORMAL",
+          "type": "BINARY_CHOICE",
+          "text": "Did you work as normal today?",
+          "choices":
+          [
+            {
+              "id": "DEMO001_FISHTODAY_NORMAL_NO",
+              "text": "No",
+              "subgroupId": "DEMO001_FISHTODAY_NORMAL_NO_SG"
+            },
+            {
+              "id": "DEMO001_FISHTODAY_NORMAL_YES",
+              "text": "Yes",
+              "subgroupId": "DEMO001_FISHTODAY_NORMAL_YES_SG"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DEMO001_FISHTODAY_NORMAL_NO_SG",
+      "fields": [
+        {
+          "id": "DEMO001_FISHTODAY_NORMAL_NO_REASON",
+          "type": "SINGLE_CHOICE",
+          "text": "Why not?",
+          "choices": [
+            {
+              "id": "REASON_A",
+              "text": "You didn't work a full day"
+            },
+            {
+              "id": "REASON_B",
+              "text": "You didn't work the normal times"
+            },
+            {
+              "id": "REASON_C",
+              "text": "You didn't record any data"
+            },
+            {
+              "id": "REASON_D",
+              "text": "You were not able to do all the work"
+            }
+          ]
+        },
+        {
+          "id": "SUBMIT_B",
+          "type": "SUBMIT"
+        }
+      ]
+    },
+    {
+      "id": "FISHTODAY_NO_OTHER_REASON_SG",
+      "fields": [
+        {
+          "id": "FISHTODAY_NO_OTHER_REASON_SPECIFICS",
+          "text": "Please specify:",
+          "type": "FREE_TEXT",
+          "config": "singleline"
+        }
+      ]
+    },
+    {
+      "id": "DEMO001_FISHTODAY_NORMAL_YES_SG",
+      "fields":[
+        {
+          "id": "DEMO001_FISHTODAY_YES_SOUS_COLLECTOR",
+          "text": "Sous collector name (optional):",
+          "type": "FREE_TEXT",
+          "config": "singleline|persist"
+        },
+        {
+          "id": "DEMO001_FISHTODAY_YES_PEOPLE_COUNT",
+          "text": "How many people in the group caught octopuses?",
+          "type": "FREE_TEXT",
+          "config": "numeric|singleline|persist"
+        },
+        {
+          "id": "time_leave",
+          "type": "TIME",
+          "text": "Around what time did the fishers leave for fishing?"
+        },
+        {
+          "id": "time_return",
+          "type": "TIME",
+          "text": "What time did the fishers return from the sea?"
+        },
+        {
+          "id": "main_fisher_name",
+          "text": "Name of the main fisher:",
+          "type": "FREE_TEXT",
+          "config": "singleline|persist"
+        },
+        {
+          "id": "main_fisher_age",
+          "type": "SINGLE_CHOICE",
+          "text": "Age of fisher (optional):",
+          "choices": [
+            {
+              "id": "main_fisher_age_less_than_14",
+              "text": "Less than 14"
+            },
+            {
+              "id": "main_fisher_age_14_to_25",
+              "text": "14 to 25"
+            },
+            {
+              "id": "main_fisher_age_26_to_50",
+              "text": "26 to 50"
+            },
+            {
+              "id": "main_fisher_age_more_than_50",
+              "text": "More than 50"
+            }
+          ]
+        },
+        {
+          "id": "main_fisher_gender",
+          "type": "SINGLE_CHOICE",
+          "text": "Sex of fisher",
+          "choices":
+          [
+            {
+              "id": "main_fisher_gender_male",
+              "text": "Male"
+            },
+            {
+              "id": "main_fisher_gender_female",
+              "text": "Female"
+            }
+          ]
+        },
+        {
+          "id": "looking_for",
+          "type": "MULTI_CHOICE",
+          "text": "What did you go fishing for?",
+          "choices": [
+            {
+              "id": "octopus",
+              "text": "Octopus",
+              "subgroupId": "octopus_subgroup"
+            },
+            {
+              "id": "sea_cucumber",
+              "text": "Sea Cucumber"
+            },
+            {
+              "id": "sea_urchin",
+              "text": "Sea Urchin"
+            },
+            {
+              "id": "fish",
+              "text": "Fish"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "subgroupId": "fish_other_subgroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fish_other_subgroup",
+      "fields": [
+        {
+          "id": "fish_for_other",
+          "text": "Enter something else not on the list:",
+          "type": "FREE_TEXT",
+          "config": "singleline|persist"
+        }
+      ]
+    },
+    {
+      "id": "octopus_subgroup",
+      "fields": [
+        {
+          "id": "octopus_sex",
+          "type": "SINGLE_CHOICE",
+          "text": "What sex is the octopus?",
+          "choices":
+          [
+            {
+              "id": "octopus_sex_female",
+              "text": "Female"
+            },
+            {
+              "id": "octopus_sex_male",
+              "text": "Male"
+            },
+            {
+              "id": "octopus_sex_unknown",
+              "text": "Unknown"
+            }
+          ]
+        },
+        {
+          "id": "mantle_image",
+          "type": "IMAGE",
+          "text": "Mantle Length",
+          "url": "http://fiskur.eu/apps/blueventures/oct_mantle_bw.png"
+        },
+        {
+          "id": "mantle_length",
+          "text": "Mantle length:",
+          "type": "FREE_TEXT",
+          "config": "singleline|numeric"
+        },
+        {
+          "id": "octopus_weight",
+          "text": "Weight of the individual octopus (grams):",
+          "type": "FREE_TEXT",
+          "config": "singleline|numeric"
+        },
+        {
+          "id": "submit_oct",
+          "type": "SUBMIT"
+        }
+      ]
+    }
+  ]
+}
