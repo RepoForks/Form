@@ -4,7 +4,7 @@
 
 Modern replacement for [ODK Collect](https://opendatakit.org/use/collect/) forms on Android.
 
-<img src="./images/screenshot1" width="50%"><img src="./images/screenshot2" width="50%">
+<img src="./images/screenshot1.png" width="50%"><img src="./images/screenshot2.png" width="50%">
 
 ## Android Usage
 
