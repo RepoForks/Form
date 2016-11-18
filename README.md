@@ -39,7 +39,7 @@ Simple Form object containing an array of fields:
         {
           "id": "Q1",
           "title": "Todays Date",
-          "type": "CURRENT_DATE"
+          "type": "current_date"
         }
       ]
     }
@@ -53,7 +53,7 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
 {
   "id": "Q4",
   "title": "Did anyone go fishing for octopus today?",
-  "type": "BINARY_CHOICE",
+  "type": "binary_choice",
   "options": [
     {
       "id": "Q4N",
@@ -72,18 +72,18 @@ A Field is a query, question, radio buttons, checkboxes, or a non interactive se
   "id": "Q3",
   "title": "Data Collector Name",
   "subtitle": "Choose your name from the list",
-  "type": "SINGLE_CHOICE",
+  "type": "single_choice",
   "options": [
     {
-      "id": "PERSONA",
+      "id": "personA",
       "text": "Person A"
     },
     {
-      "id": "PERSONB",
+      "id": "personB",
       "text": "Person B"
     },
     {
-      "id": "PERSONC",
+      "id": "personC",
       "text": "Person C"
     }
   ]
@@ -98,7 +98,7 @@ Simple example with a single top-level field showing two alternative paths a for
 
 ```json
 {
-  "id": "DEMO001",
+  "id": "demo001",
   "title": "Octopus Monitoring",
   "date": "02112016",
   "time": "11:32",
@@ -111,7 +111,7 @@ Simple example with a single top-level field showing two alternative paths a for
       "fields": [
         {
           "id": "fish_today",
-          "type": "BINARY_CHOICE",
+          "type": "binary_choice",
           "text": "Did anyone go fishing for octopus today?",
           "choices":
           [
@@ -134,7 +134,7 @@ Simple example with a single top-level field showing two alternative paths a for
       "fields": [
         {
           "id": "fish_today_no_label",
-          "type": "STATIC_TEXT",
+          "type": "static_text",
           "title": "Fishing Today: No"
         }
       ]
@@ -144,7 +144,7 @@ Simple example with a single top-level field showing two alternative paths a for
       "fields": [
         {
           "id": "fish_today_yes_label",
-          "type": "STATIC_TEXT",
+          "type": "static_text",
           "title": "Fishing Today: Yes"
         }
       ]
@@ -165,7 +165,7 @@ Use for titles, notes, explanations - any extra instruction for the end user, th
   "title": "Form",
   "subtitle": "A simple replacement for ODK Collect",
   "text": "Hello world!",
-  "type": "STATIC_TEXT"
+  "type": "static_text"
 }
 ```
 
@@ -177,7 +177,7 @@ Free text input from the user.
 {
   "id": "TXT01",
   "text": "Sous collector name:",
-  "type": "FREE_TEXT"
+  "type": "free_text"
 }
 ```
 
@@ -187,7 +187,7 @@ Config options: `singleline`, `persist`, and either: `numeric`, `email`, or `pho
 {
   "id": "TXT01",
   "text": "Sous collector name:",
-  "type": "FREE_TEXT",
+  "type": "free_text",
   "config": "singleline|persist"
 }
 ```
@@ -200,7 +200,7 @@ A simple non-interactive horizontal divider to seperate two other fields.
 ```json
 {
   "id": "D1",
-  "type": "DIVIDER"
+  "type": "divider"
 }
 ```
 
@@ -211,7 +211,7 @@ Invisible field to provide vertical spacing where needed.
 ```json
 {
   "id": "SP1",
-  "type": "SPACER",
+  "type": "spacer",
   "config": "160"
 }
 ```
@@ -221,7 +221,7 @@ Invisible field to provide vertical spacing where needed.
 ```json
 {
   "id": "image1",
-  "type": "IMAGE",
+  "type": "image",
   "url": "http://fiskur.eu/apps/blueventures/oct_mantle.png"
 }
 ```
@@ -233,7 +233,7 @@ A non-interactive field that displays, and returns, the current date.
 ```json
 {
   "id": "D1",
-  "type": "CURRENT_DATE",
+  "type": "current_date",
   "text": "Today's Date"
 }
 ```
@@ -243,7 +243,7 @@ A non-interactive field that displays, and returns, the current date.
 ```json
 {
   "id": "DOB1",
-  "type": "DATE",
+  "type": "date",
   "text": "Date of Birth"
 }
 ```
@@ -253,7 +253,7 @@ A non-interactive field that displays, and returns, the current date.
 ```json
 {
   "id": "WAKE1",
-  "type": "TIME",
+  "type": "time",
   "text": "What time did you wake up?"
 }
 ```
@@ -264,17 +264,17 @@ A field that allows a binary decision but displays a more prominent ui than two 
 
 ```json
 {
-  "id": "WORK_NORM",
-  "type": "BINARY_CHOICE",
+  "id": "work_normal",
+  "type": "binary_choice",
   "text": "Did you work as normal today?",
   "choices":
   [
     {
-      "id": "WORK_NORM_NO",
+      "id": "work_normal_no",
       "text": "No"
     },
     {
-      "id": "WORK_NORM_YES",
+      "id": "work_normal_yes",
       "text": "Yes"
     }
   ]
@@ -285,28 +285,28 @@ A field that allows a binary decision but displays a more prominent ui than two 
 
 ```
 {
-  "id": "GENDER1",
-  "type": "SINGLE_CHOICE",
+  "id": "gender",
+  "type": "single_choice",
   "text": "What gender do you identify with?",
   "choices": [
     {
-      "id": "GENA",
+      "id": "gendA",
       "text": "female"
     },
     {
-      "id": "GENB",
+      "id": "gendB",
       "text": "male"
     },
     {
-      "id": "GENC",
+      "id": "gendC",
       "text": "unspecified"
     },
     {
-      "id": "GEND",
+      "id": "gendD",
       "text": "intersex"
     },
     {
-      "id": "GENE",
+      "id": "gendE",
       "text": "prefer not to say"
     }
   ]
@@ -318,43 +318,43 @@ A field that allows a binary decision but displays a more prominent ui than two 
 ```json
 {
   "id": "music_genre",
-  "type": "MULTI_CHOICE",
+  "type": "multi_choice",
   "text": "Which music genres do you enjoy?",
   "choices": [
     {
-      "id": "GENA",
+      "id": "musA",
       "text": "Avant-Garde"
     },
     {
-      "id": "GENB",
+      "id": "musB",
       "text": "Baroque"
     },
     {
-      "id": "GENC",
+      "id": "musC",
       "text": "Chamber Music"
     },
     {
-      "id": "GEND",
+      "id": "musCh",
       "text": "Choral"
     },
     {
-      "id": "GENE",
+      "id": "musCl",
       "text": "Classical Crossover"
     },
     {
-      "id": "GENF",
+      "id": "musM",
       "text": "Minimalism"
     },
     {
-      "id": "GENG",
+      "id": "musMC",
       "text": "Modern Composition"
     },
     {
-      "id": "GENH",
+      "id": "musOp",
       "text": "Opera"
     },
     {
-      "id": "GENI",
+      "id": "musR",
       "text": "Romantic"
     }
   ]
@@ -381,8 +381,8 @@ An implementation of this library has a requirement for relatively obscure local
 ```json
 {
   "id": "DOB1",
-  "type": "DATE",
-  "text": "{DOB}"
+  "type": "date",
+  "text": "{dob}"
 }
 ```
 
@@ -394,7 +394,7 @@ Example dictionary:
       "languageId": "english",
       "dictionary": [
         {
-          "key": "{DOB}",
+          "key": "{dob}",
           "text": "Date of Birth"
         },
         {
@@ -407,7 +407,7 @@ Example dictionary:
       "languageId": "spanish",
       "dictionary": [
         {
-          "key": "{DOB}",
+          "key": "{dob}",
           "text": "Fecha de nacimiento"
         },
         {
