@@ -4,6 +4,8 @@
 
 Modern replacement for [ODK Collect](https://opendatakit.org/use/collect/) forms on Android.
 
+<img src="./images/screenshot1" width="50%"><img src="./images/screenshot2" width="50%">
+
 ## Android Usage
 
 Create a Form object from a String of json in the [format detailed below](https://github.com/fiskurgit/Form#format):
