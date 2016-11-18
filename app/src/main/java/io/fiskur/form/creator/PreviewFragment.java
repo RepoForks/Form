@@ -30,11 +30,11 @@ public class PreviewFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_preview, container, false);
 
     formHolder = (LinearLayout) view.findViewById(R.id.form_holder);
-    FormApi.getInstance().buildViews(getActivity(), Preview.form, formHolder);
+    FormApi.getInstance().buildViews(getActivity(), formHolder);
     return view;
   }
 
   public void update(){
-    FormApi.getInstance().buildViews(getActivity(), Preview.form, formHolder);
+    FormApi.getInstance().buildViews(getActivity(), formHolder);
   }
 }

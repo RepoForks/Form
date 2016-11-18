@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spacer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/field_padding"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/popup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/field_font_body_size"
+        android:textStyle="bold"
+        android:visibility="visible"
+        tools:text="Multiple items"
+        android:paddingBottom="@dimen/field_padding"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/popup_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/popup_add_new_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Add new"/>
+</LinearLayout>

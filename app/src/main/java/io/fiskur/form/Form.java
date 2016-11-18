@@ -42,6 +42,11 @@ public class Form implements Serializable {
     return null;
   }
 
+  public void addGroup(String fieldId, Group group){
+    Field field = findField(fieldId);
+    field.groups.add(group);
+  }
+
   public void addField(String groupId, Field field){
     getGroupFields(groupId).add(field);
   }

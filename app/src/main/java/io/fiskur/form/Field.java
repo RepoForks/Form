@@ -18,6 +18,7 @@ public class Field implements Serializable{
   public static final String TYPE_BINARY_CHOICE = "BINARY_CHOICE";
   public static final String TYPE_FREE_TEXT = "FREE_TEXT";
   public static final String TYPE_IMAGE = "IMAGE";
+  public static final String TYPE_POPUP_SUBGROUP = "POPUP_SUBGROUP";
   public static final String TYPE_SUBMIT = "SUBMIT";
 
   public String id;
@@ -28,8 +29,11 @@ public class Field implements Serializable{
   public String text;
   public String type;
   public String parent = null;
+  public String subgroupId;
   public List<Choice> choices;
   public boolean required;
+  public Response response;
+  public List<Group> groups;
 
   public boolean hasSubfields(){
     if(choices != null){

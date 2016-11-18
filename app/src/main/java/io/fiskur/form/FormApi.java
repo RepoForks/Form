@@ -15,22 +15,31 @@ import io.fiskur.form.views.FieldDivider;
 import io.fiskur.form.views.FieldFreeText;
 import io.fiskur.form.views.FieldImage;
 import io.fiskur.form.views.FieldMutipleChoice;
+import io.fiskur.form.views.FieldPopup;
 import io.fiskur.form.views.FieldSingleChoice;
 import io.fiskur.form.views.FieldSpacer;
 import io.fiskur.form.views.FieldStaticText;
 import io.fiskur.form.views.FieldSubmit;
 import io.fiskur.form.views.FieldTime;
+import io.fiskur.form.views.SubgroupPopup;
 
-public class FormApi implements SubmitListener {
+public class FormApi implements SubmitListener, FieldListener {
 
   private static final String TAG = "FormApi";
-
   private static final FormApi instance = new FormApi();
 
-  private FormUIGraph formUIGraph;
+  private Form form = null;
+  private LinearLayout root;
 
   public FormApi() {
-    formUIGraph = new FormUIGraph();
+  }
+
+  public Form getForm(){
+    return form;
+  }
+
+  public String getFormTitle(){
+    return form.title;
   }
 
   public static FormApi getInstance() {
@@ -39,16 +48,17 @@ public class FormApi implements SubmitListener {
 
   private ImageLoader imageLoader = null;
 
-  public Form createForm(String jsonForm){
+  public void createForm(String jsonForm){
     Gson gson = new GsonBuilder().create();
-    return gson.fromJson(jsonForm, Form.class);
+    form =  gson.fromJson(jsonForm, Form.class);
   }
 
   public void setImageLoader(ImageLoader imageLoader){
     this.imageLoader = imageLoader;
   }
 
-  public void buildViews(Context context, Form form, LinearLayout root){
+  public void buildViews(Context context, LinearLayout root){
+    this.root = root;
     if(root == null){
       Log.e(TAG, "Root LinearLayout is null");
       return;
@@ -59,17 +69,12 @@ public class FormApi implements SubmitListener {
 
     root.setOrientation(LinearLayout.VERTICAL);
 
-    formUIGraph.setForm(form);
-    formUIGraph.setRootLayout(root);
-
     String startGroupId = form.startGroupId;
-
 
     for(Field field : form.getGroupFields(startGroupId)){
       addField(context, field, root, false);
     }
   }
-
 
   public void buildGroup(Context context, Group group, LinearLayout holder){
 
@@ -94,7 +99,7 @@ public class FormApi implements SubmitListener {
 
   private void addField(Context context, Field field, LinearLayout root, boolean isSubfield){
     l("Adding field of type: " + field.type);
-    switch(field.type){
+    switch(field.type.toUpperCase()){
       case Field.TYPE_DIVIDER:
         FieldDivider div = new FieldDivider(context);
         div.setTag(field.id);
@@ -174,7 +179,7 @@ public class FormApi implements SubmitListener {
         binary.setTag(field.id);
         binary.setField(field);
         if(field.hasSubfields()) {
-          binary.setFieldListener(formUIGraph);
+          binary.setFieldListener(this);
         }
         root.addView(binary);
         if(isSubfield){
@@ -187,7 +192,7 @@ public class FormApi implements SubmitListener {
         singleChoice.setTag(field.id);
         singleChoice.setField(context, field);
         if(field.hasSubfields()) {
-          singleChoice.setFieldListener(formUIGraph);
+          singleChoice.setFieldListener(this);
         }
         root.addView(singleChoice);
         if(isSubfield){
@@ -200,7 +205,7 @@ public class FormApi implements SubmitListener {
         multiChoice.setTag(field.id);
         multiChoice.setField(context, field);
         if(field.hasSubfields()) {
-          multiChoice.setFieldListener(formUIGraph);
+          multiChoice.setFieldListener(this);
         }
         root.addView(multiChoice);
         if(isSubfield){
@@ -217,6 +222,18 @@ public class FormApi implements SubmitListener {
         if(isSubfield){
           imageField.setAlpha(0);
           ViewTools.show(imageField, FADE_TIME);
+        }
+        break;
+      case Field.TYPE_POPUP_SUBGROUP:
+        //todo - add button and label - set callback to graph.
+        FieldPopup popupField = new FieldPopup(context);
+        popupField.setTag(field.id);
+        popupField.setFieldListener(this);
+        popupField.setField(field);
+        root.addView(popupField);
+        if(isSubfield){
+          popupField.setAlpha(0);
+          ViewTools.show(popupField, FADE_TIME);
         }
         break;
       case Field.TYPE_SUBMIT:
@@ -260,5 +277,47 @@ public class FormApi implements SubmitListener {
   @Override
   public void submitForm() {
 
+  }
+
+  @Override
+  public void choiceSelected(Context context, String fieldId, String choiceId, String subgroupId) {
+    Field field = findField(fieldId);
+    if(field == null){
+      return;
+    }
+
+    buildSubgroup(context, fieldId, subgroupId);
+  }
+
+  @Override
+  public void subgroupPopup(Context context, final Field parentField, String subgroupId) {
+    Group group = form.getGroup(subgroupId);
+    SubgroupPopup popup = new SubgroupPopup(context, parentField, group, new SubgroupPopup.GroupPopupListener() {
+      @Override
+      public void addGroup(Group group) {
+        Log.d(TAG, "addGroup: " + group.id);
+        form.addGroup(parentField.id, group);
+        FieldPopup parent = (FieldPopup) ViewTools.findView(root, parentField.id);
+        parent.updateRows(form.findField(parentField.id));
+      }
+    });
+    popup.show();
+  }
+
+  private void buildSubgroup(Context context, String fieldId, String subgroupId){
+    String holderTag = String.format("%s_holder", fieldId);
+    LinearLayout holder = (LinearLayout) root.findViewWithTag(holderTag);
+    if(holder == null){
+      Log.e(TAG, "Could not find subgroup holder");
+      return;
+    }
+    holder.removeAllViews();
+
+    Group group = form.getGroup(subgroupId);
+    buildGroup(context, group, holder);
+  }
+
+  private Field findField(String fieldId){
+    return form.findField(fieldId);
   }
 }

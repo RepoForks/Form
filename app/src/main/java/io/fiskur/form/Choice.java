@@ -7,4 +7,5 @@ public class Choice implements Serializable{
   public String text;
   public String parentId;
   public String subgroupId;
+  public Response response;
 }

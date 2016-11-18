@@ -13,6 +13,7 @@ import io.fiskur.form.Choice;
 import io.fiskur.form.Field;
 import io.fiskur.form.FieldListener;
 import io.fiskur.form.R;
+import io.fiskur.form.Response;
 
 //To support Yes/No fields with buttons instead of a radio group
 public class FieldBinary extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
@@ -69,6 +70,12 @@ public class FieldBinary extends LinearLayout implements CompoundButton.OnChecke
       buttonA.setOnCheckedChangeListener(this);
       buttonB.setOnCheckedChangeListener(this);
     }
+  }
+
+  public Response getReponse(){
+    Response response = new Response();
+    response.selected = buttonA.isChecked();
+    return response;
   }
 
   public void setFieldListener(FieldListener fieldListener){
